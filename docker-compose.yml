@@ -26,9 +26,9 @@ services:
       - db:/var/lib/postgresql/data/
     environment:
       # Учетные данные, которые можно будет переопределить
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=db
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
   redis:
     image: "redis:alpine"
     hostname: redis
