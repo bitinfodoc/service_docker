@@ -1,0 +1,1 @@
+from collectregisters.utils.readings import getReadingsFromSite #noqa

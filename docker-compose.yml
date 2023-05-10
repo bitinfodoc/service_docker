@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  web:
+    restart: always
+    # Берем Dockerfile из каталога app
+    build: ./mrgServices
+    # Открываем порт 8000 внутри и снаружи
+    volumes:
+      - files:/app/files
+    environment:
+      - REDIS_HOST=redis
+    ports:
+      - 8010:8000
+    # Файл содержащий переменные для контейнера
+    env_file:
+      - ./.env.dev
+  db:
+    restart: always
+    hostname: db
+    #command: sh -c "chmod 700 -R /var/lib/postgresql/data"
+    # Образ и версия базы, которую мы будем использовать
+    image: postgres:14
+    # Внешний том(volume) и место где он будет подключен внутри контейнера
+    volumes:
+      - db:/var/lib/postgresql/data/
+    environment:
+      # Учетные данные, которые можно будет переопределить
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+  redis:
+    image: "redis:alpine"
+    hostname: redis
+    ports:
+      - 6379:6379
+  celery:
+    build: ./mrgServices
+    command: sh -c 'celery -A main worker --loglevel=info --concurrency=5 --pool=eventlet'
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - web
+      - db
+      - redis
+  celery-beat:
+    build: ./mrgServices
+    command: sh -c 'celery -A main beat -l debug'
+    # volumes:
+    #   - ./project/:/usr/src/app/
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - web
+      - db
+      - redis
+      - celery
+volumes:
+  db:
+  files:
