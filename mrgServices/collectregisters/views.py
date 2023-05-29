@@ -2,14 +2,13 @@ from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from generalutils.utils import sendEmailMessage
-from collectregisters.utils import getReadingsFromSite
+from collectregisters.utils import getReadingsFromSite, getContactsFromSite
 from datetime import datetime
 
 from django.http import HttpResponse
 
 
 class getReadings(viewsets.ViewSet):
-    # serializer_class = FileUploadSerializer
 
     def list(self, request):
 
@@ -26,13 +25,21 @@ class getReadings(viewsets.ViewSet):
 
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
-# Create your views here.
-# def getReadings(request):
-#     res = getReadingsFromSite()
-#     print(res)
-#     return HttpResponse('hello response')
+class getContacts(viewsets.ViewSet):
 
+    def list(self, request):
 
+        print('hello views')
+        file = getContactsFromSite()
 
-# функция получения данных из таблицы
+        sendEmailMessage(
+            message_title = 'Сбор контактов с сайта',
+            message_body = 'Контакты с сайта во вложении',
+            message_file = file,
+            message_sender = 'contacts@orenburgregiongaz.ru',
+            message_recipient = ['p.blagovisnyi@mail.org056.ru']
+        )
+
+        return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
+
 

@@ -8,6 +8,12 @@ services:
     # Открываем порт 8000 внутри и снаружи
     volumes:
       - files:/app/files
+      # - assistant_data:/app/import
+      # - type: volume
+      #   source: assistant_data
+      #   target: /app/importfiles
+      #   volume:
+      #     nocopy: true
     environment:
       - REDIS_HOST=redis
     ports:
@@ -55,6 +61,28 @@ services:
       - db
       - redis
       - celery
+  flower:
+    image: mher/flower:0.9.7
+    command: ['flower', '--broker=redis://redis:6379', '--port=5566']
+    ports:
+      - 5566:5566
+    depends_on:
+      - web
+      - db
+      - redis
+      - celery
+      - celery-beat
 volumes:
   db:
   files:
+  # assistant_data:
+  #   driver: local
+  #   driver_opts:
+  #     type: cifs
+  #     # device: "\\\\172.17.156.10\\Obmen\\"
+  #     # o: "username=U5630305,password=95486,domain=AC,vers=3.0,uid=4674,gid=S-1-5-21-3008397267-4057616034-1962435636"
+  #     device: "//172.17.156.10/Obmen/"
+  #     # o: "uid=4674, username=AC/U5630305, password=95486, iocharset=utf8, file_mode=0777, dir_mode=0777"
+  #     # o: "username=U5630305, domain=AC, password=95486, uid=4674, gid-1000, vers=3.0, rw"
+  #     o: "username=U5630305, password=95486, file_mode=0777,dir_mode=0777,uid=4674,gid=S-1-5-21-3008397267-4057616034-1962435636,vers=3.0, rw"
+  #     # device: "//172.17.156.10/Obmen"

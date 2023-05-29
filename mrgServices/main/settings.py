@@ -177,3 +177,5 @@ BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
+
+CSRF_TRUSTED_ORIGINS = ['https://gpbt.rgk56.ru/', 'http://gpbt.rgk56.ru/', 'http://0.0.0.0', 'http://127.0.0.1:8000', 'http://127.0.0.1', ]
