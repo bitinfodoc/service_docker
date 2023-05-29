@@ -107,7 +107,7 @@ def getContactsFromSite():
             # внесение изменений в базу
             if settings.DEBUG == False:
                 date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                update_query = "UPDATE mmrg_collecting_contacts SET unload = 1, dat_unload = %s WHERE dat_unload is null AND unload is null"
+                update_query = "UPDATE mmrg_collecting_contacts SET unload = 1, dat_unload = %s WHERE dat_unload IS NULL AND unload IS NULL"
                 cursor.execute(update_query, (date))
 
             connection.commit()

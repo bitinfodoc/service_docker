@@ -26,7 +26,7 @@ def collectContacts():
         message_body = 'Контакты с сайта во вложении',
         message_file = file,
         message_sender = 'contacts@orenburgregiongaz.ru',
-        message_recipient = ['oplata@mail.org056.ru','p.blagovisnyi@mail.org056.ru']
+        message_recipient = ['s.stepanov@mail.org056.ru','p.blagovisnyi@mail.org056.ru']
     )
 
 # @shared_task

@@ -4,3 +4,5 @@
 mrgServices/venv/
 mrgServices/files/
 mrgServices/db.sqlite3
+
+docker-compose.yml
