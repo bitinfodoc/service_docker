@@ -8,6 +8,7 @@ services:
     # Открываем порт 8000 внутри и снаружи
     volumes:
       - files:/app/files
+      - ./reestrs:/app/reestrs
       # - assistant_data:/app/import
       # - type: volume
       #   source: assistant_data
@@ -45,6 +46,9 @@ services:
     command: sh -c 'celery -A main worker --loglevel=info --concurrency=5 --pool=eventlet'
     env_file:
       - ./.env.dev
+    volumes:
+      - files:/app/files
+      - ./reestrs:/app/reestrs
     depends_on:
       - web
       - db
@@ -75,6 +79,7 @@ services:
 volumes:
   db:
   files:
+  reestrs:
   # assistant_data:
   #   driver: local
   #   driver_opts:

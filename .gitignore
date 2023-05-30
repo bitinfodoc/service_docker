@@ -3,6 +3,8 @@
 
 mrgServices/venv/
 mrgServices/files/
+mrgServices/reestrs/
 mrgServices/db.sqlite3
+reestrs/
 
 docker-compose.yml

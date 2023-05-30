@@ -1,23 +1,29 @@
 from lsvalidate.models import LsRecord
 
-# def createLsRecord(current_file):
+def createLsRecord(current_file_name):
 
-#     file_lines = current_file.read().decode().splitlines()
+    file = open(current_file_name, 'r')
 
-#     for line in file_lines:
-#         line_result = line.split('=')
-#         print(line_result)
-#         if len(line_result) < 2:
-#             break
-#         record = LsRecord()
-#         record.account_number = line_result[1]
-#         record.account_number_rng = line_result[0]
-#         record.save()
+    while True:
+        line_result = file.readline().split('=')
+        if len(line_result) < 2:
+            break
+        if not line_result:
+            break
+        try:
+            records = LsRecord.objects.filter(account_number_rng = line_result[0])
+            # print(records.values())
 
-#         # прерываем цикл, если строка пустая
-#         if not line:
-#             break
+            if len(records) == 0:
+                LsRecord(
+                    account_number = str(line_result[1]).strip(),
+                    account_number_rng = str(line_result[0]).strip()
+                ).save()
+            else:
+                print('already exist')
+        except:
+            file.close
+            print("Can't write LsRecord")
+            pass
 
-#     return {
-#             "status": 0
-#         }
+    file.close
