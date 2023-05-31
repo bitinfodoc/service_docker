@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from .serializers import FileUploadSerializer, FileValidateSerializer
 from lsvalidate.models import LsRecord
 from lsvalidate.tasks import ls_upload
+from django.conf import settings
 # Create your views here.
 
 
@@ -20,8 +21,11 @@ class LsUpload(viewsets.ViewSet):
         return Response(response)
 
     def delete(self, request):
-        LsRecord.objects.all().delete()
-        return Response({'All data delited'})
+        response_text = 'No DEBUG. No data delited.'
+        if settings.DEBUG == 1:
+            LsRecord.objects.all().delete()
+            response_text = 'All data delited'
+        return Response({response_text})
 
 
 class LsValidate(viewsets.ViewSet):

@@ -36,7 +36,7 @@ def makeContactsFileCSV(values):
             print('-------------------------------------------------------')
             print(row)
             date = datetime.date(row['dat_write']).strftime("%d.%m.%Y")
-            filewriter.writerow([row['ls'],  row['email'], row['phone'], date])
+            filewriter.writerow([str(row['ls']),  str(row['email']), str(row['phone']), str(date)])
 
     return filename
 
