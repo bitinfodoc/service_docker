@@ -3,6 +3,7 @@ import dbf
 import requests
 import json
 import csv
+# import numpy as np
 
 from datetime import datetime
 from django.core.mail import send_mail, EmailMessage
@@ -12,32 +13,31 @@ from django.conf import settings
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 
-def makeReceiptsFileCSV(values):
-# ------------------------------------------------------------------------
-    print('------------------------------------------------------')
-    print(values)
+
+def createFileCSV(folder, dataType):
     date=datetime.now().strftime("%Y%m%d")
-
-    if not os.path.exists(PROJECT_PATH+'/files/receipts'):
-        os.makedirs(PROJECT_PATH+'/files/receipts')
-
-    filename = PROJECT_PATH+'/files/receipts/ZDE'+date+'.csv'
-
+    if not os.path.exists(PROJECT_PATH+'/files/'+str(folder)+''):
+        os.makedirs(PROJECT_PATH+'/files/'+str(folder)+'')
+    filename = PROJECT_PATH+'/files/receipts/'+str(dataType)+date+'.csv'
     if os.path.exists(filename):
         ts = datetime.now().timestamp()
-        new_filename = PROJECT_PATH+'/files/receipts/ZDE'+date+'_'+str(ts)+'.csv'
+        new_filename = PROJECT_PATH+'/files/receipts/'+str(dataType)+date+'_'+str(ts)+'.csv'
         os.rename(filename, new_filename)
+    return filename
+
+
+
+def makeReceiptsFileCSV(values):
+
+    filename = createFileCSV ('receipts', 'ZDE')
 
     with open(filename, 'w', newline='') as csvfile:
         filewriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         filewriter.writerow(['ls', 'email', 'dat_write', 'pr_paper'])
-
         for row in values:
-            print('-------------------------------------------------------')
-            print(row)
-            # date = datetime.date(row['dat_write']).strftime("%d.%m.%Y")
-            filewriter.writerow([str(row['ls']).strip(),  str(row['email']).strip(), str(row['dat_write']).strip(), str(row['pr_paper']).strip()])
-
+            if 'pr_paper' in row:
+                row['pr_paper'] = '0'
+            filewriter.writerow([str(row['ls']).strip(), str(row['email']).strip(), str(row['dat_write']).strip(), ])
     return filename
 
 def getReceiptsFromSite():
@@ -58,20 +58,27 @@ def getReceiptsFromSite():
 
         with connection.cursor() as cursor:
             # SQL
-            # sql = "Select ls, email, dat_write, phone from mmrg_collecting_contacts"
-            sql = "Select ls, email, dat_write, pr_paper from mmrg_dostavka_kvit WHERE dat_unload IS NULL AND unload = 0"
-            # sql = "Select ls, pok, dat_write, tel from mmrg_datametr WHERE dat_write between '2022-03-21 10:13:00' and '2022-03-25 10:00:00'"
+            cursor.execute("Select ls, email, dat_write, pr_paper from mmrg_dostavka_kvit WHERE dat_unload IS NULL AND unload = 0")
+            first_part = cursor.fetchall()
 
-            cursor.execute(sql)
-            print ("cursor.description: ", cursor.description)
-            # print (cursor.fetchall())
+            cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE unload_receipt IS NULL AND receipt_email = 1")
+            second_part = cursor.fetchall()
+            # print('--------------------------------------------------------------------')
+            # print(first_part)
 
-            filename = makeReceiptsFileCSV(cursor.fetchall())
+            # print('--------------------------------------------------------------------')
+            # print(second_part)
+            all_data = first_part + second_part
+            filename = makeReceiptsFileCSV(all_data)
 
             # внесение изменений в базу
             if settings.DEBUG == False:
                 date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
                 update_query = "UPDATE mmrg_dostavka_kvit SET unload = 1, dat_unload = %s WHERE dat_unload IS NULL AND unload = 0"
+                cursor.execute(update_query, (date))
+
+                update_query = "UPDATE mmrg_collecting_contacts SET unload_receipt = 1 WHERE unload_receipt = 0"
                 cursor.execute(update_query, (date))
 
             connection.commit()
