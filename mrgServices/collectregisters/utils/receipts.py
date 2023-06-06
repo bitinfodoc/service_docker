@@ -29,7 +29,7 @@ def createFileCSV(folder, dataType):
 
 def makeReceiptsFileCSV(values):
 
-    filename = createFileCSV ('receipts', 'ZDE')
+    filename = createFileCSV('receipts', 'ZDE')
 
     with open(filename, 'w', newline='') as csvfile:
         filewriter = csv.writer(csvfile, delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -37,7 +37,7 @@ def makeReceiptsFileCSV(values):
         for row in values:
             if 'pr_paper' in row:
                 row['pr_paper'] = '0'
-            filewriter.writerow([str(row['ls']).strip(), str(row['email']).strip(), str(row['dat_write']).strip(), ])
+            filewriter.writerow([str(row['ls']).strip(), str(row['email']).strip(), str(row['dat_write']).strip(), str(row['pr_paper']).strip()])
     return filename
 
 def getReceiptsFromSite():
