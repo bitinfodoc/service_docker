@@ -7,7 +7,7 @@ services:
     build: ./mrgServices
     # Открываем порт 8000 внутри и снаружи
     volumes:
-      - files:/app/files
+      - ./files:/app/files
       - ./reestrs:/app/reestrs
       # - assistant_data:/app/import
       # - type: volume
@@ -47,7 +47,7 @@ services:
     env_file:
       - ./.env.dev
     volumes:
-      - files:/app/files
+      - ./files:/app/files
       - ./reestrs:/app/reestrs
     depends_on:
       - web
