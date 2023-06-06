@@ -36,6 +36,8 @@ def makeReceiptsFileCSV(values):
         filewriter.writerow(['ls', 'email', 'dat_write', 'pr_paper'])
         for row in values:
             if 'pr_paper' in row:
+                pass
+            else:
                 row['pr_paper'] = '0'
             filewriter.writerow([str(row['ls']).strip(), str(row['email']).strip(), str(row['dat_write']).strip(), str(row['pr_paper']).strip()])
     return filename
