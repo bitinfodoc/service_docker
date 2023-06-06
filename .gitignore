@@ -6,5 +6,6 @@ mrgServices/files/
 mrgServices/reestrs/
 mrgServices/db.sqlite3
 reestrs/
+files/
 
 docker-compose.yml
