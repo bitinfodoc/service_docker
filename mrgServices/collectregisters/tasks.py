@@ -49,10 +49,10 @@ def collectReceipts():
     else:
         receipt_to = ['p.blagovisnyi@mail.org056.ru']
 
-    # sendEmailMessage(
-    #     message_title = 'Заявки на квитанции с сайта',
-    #     message_body = 'Заявки на квитанции с сайта во вложении',
-    #     message_file = file,
-    #     message_sender = 'zayavki@orenburgregiongaz.ru',
-    #     message_recipient = receipt_to
-    # )
+    sendEmailMessage(
+        message_title = 'Заявки на квитанции с сайта',
+        message_body = 'Заявки на квитанции с сайта во вложении',
+        message_file = file,
+        message_sender = 'zayavki@orenburgregiongaz.ru',
+        message_recipient = receipt_to
+    )
