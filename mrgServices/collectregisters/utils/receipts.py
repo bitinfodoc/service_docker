@@ -63,11 +63,7 @@ def getReceiptsFromSite():
 
             cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE unload_receipt IS NULL AND receipt_email = 1")
             second_part = cursor.fetchall()
-            # print('--------------------------------------------------------------------')
-            # print(first_part)
 
-            # print('--------------------------------------------------------------------')
-            # print(second_part)
             all_data = first_part + second_part
             filename = makeReceiptsFileCSV(all_data)
 
@@ -76,10 +72,10 @@ def getReceiptsFromSite():
                 date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
                 update_query = "UPDATE mmrg_dostavka_kvit SET unload = 1, dat_unload = %s WHERE dat_unload IS NULL AND unload = 0"
-                cursor.execute(update_query, (date))
+                cursor.execute(str(update_query), str(date))
 
                 update_query = "UPDATE mmrg_collecting_contacts SET unload_receipt = 1 WHERE unload_receipt = 0"
-                cursor.execute(update_query, (date))
+                cursor.execute(str(update_query), str(date))
 
             connection.commit()
     finally:
