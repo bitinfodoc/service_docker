@@ -72,12 +72,14 @@ def getReceiptsFromSite():
                 date=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
                 update_query = "UPDATE mmrg_dostavka_kvit SET unload = 1, dat_unload = %s WHERE dat_unload IS NULL AND unload = 0"
-                cursor.execute(str(update_query), str(date))
+                cursor.execute(update_query, (date))
+                connection.commit()
 
                 update_query = "UPDATE mmrg_collecting_contacts SET unload_receipt = 1 WHERE unload_receipt = 0"
-                cursor.execute(str(update_query), str(date))
+                cursor.execute(update_query, (date))
+                connection.commit()
 
-            connection.commit()
+
     finally:
         # Закрыть соединение (Close connection).
         connection.close()
