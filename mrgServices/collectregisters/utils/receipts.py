@@ -64,7 +64,7 @@ def getReceiptsFromSite():
             cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE unload_receipt IS NULL AND receipt_email = 1")
             second_part = cursor.fetchall()
 
-            all_data = first_part + second_part
+            all_data = tuple(first_part) + tuple(second_part)
             filename = makeReceiptsFileCSV(all_data)
 
             # внесение изменений в базу
