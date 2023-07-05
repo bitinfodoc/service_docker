@@ -8,4 +8,6 @@ mrgServices/db.sqlite3
 reestrs/
 files/
 
+mrgServices/main/settings.py
+mrgServices/Dockerfile
 docker-compose.yml

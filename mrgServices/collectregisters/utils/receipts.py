@@ -62,15 +62,15 @@ def getReceiptsFromSite():
             # SQL
             cursor.execute("Select ls, email, dat_write, pr_paper from mmrg_dostavka_kvit WHERE dat_unload IS NULL AND unload = 0")
             # cursor.execute("Select ls, email, dat_write, pr_paper from mmrg_dostavka_kvit WHERE dat_write >= '2023-06-05 06:59:00'")
-            first_part = cursor.fetchall()
+            data = cursor.fetchall()
 
-            cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE unload_receipt IS NULL AND receipt_email = 1")
-            # cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE dat_write >= '2023-06-05 03:00:00'")
-            second_part = cursor.fetchall()
+            # cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE unload_receipt IS NULL AND receipt_email = 1")
+            # # cursor.execute("Select ls, email, dat_write from mmrg_collecting_contacts WHERE dat_write >= '2023-06-05 03:00:00'")
+            # second_part = cursor.fetchall()
 
-            all_data = tuple(first_part) + tuple(second_part)
-            filename = makeReceiptsFileCSV(all_data)
-            print(all_data)
+            # all_data = tuple(first_part) + tuple(second_part)
+            filename = makeReceiptsFileCSV(data)
+            print(data)
 
             # внесение изменений в базу
             if settings.DEBUG == False:
@@ -88,7 +88,7 @@ def getReceiptsFromSite():
                 cursor.execute("UPDATE mmrg_dostavka_kvit SET unload = 1, dat_unload = %s WHERE dat_unload IS NULL AND unload = 0", (date))
                 print('----------------------------------------------------------------------------------------')
                 # cursor.execute("UPDATE mmrg_collecting_contacts SET unload_receipt = 1 WHERE dat_write >= '2023-06-05 03:00:00'")
-                cursor.execute("UPDATE mmrg_collecting_contacts SET unload_receipt = 1 WHERE unload_receipt = 0")
+                # cursor.execute("UPDATE mmrg_collecting_contacts SET unload_receipt = 1 WHERE unload_receipt = 0")
                 print('----------------------------------------------------------------------------------------')
                 connection.commit()
 
