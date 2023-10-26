@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/', include('rng_base.urls')),
     path('api/', include('lsvalidate.urls')),
     path('api/', include('collectregisters.urls')),
+    path('api/', include('contracts.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

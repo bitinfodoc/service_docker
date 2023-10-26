@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rng_base.apps.RngBaseConfig',
     'lsvalidate.apps.LsvalidateConfig',
     'collectregisters.apps.CollectregistersConfig',
+    'contracts.apps.ContractsConfig',
 ]
 
 MIDDLEWARE = [
@@ -91,8 +92,8 @@ DATABASES = {
             'NAME': os.environ.get("DB_NAME", default='db'),
             'USER': os.environ.get("DB_USER", default='user'),
             'PASSWORD': os.environ.get("DB_PASS", default='password'),
-            'HOST': 'db',
-            'PORT': '',
+            'HOST': os.environ.get("DB_HOST", default='127.0.0.1'),
+            'PORT': os.environ.get("DB_POST", default='5432'),
         }
     }
 

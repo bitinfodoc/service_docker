@@ -14,6 +14,7 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 def makeReadingsFile(values):
 # ------------------------------------------------------------------------
     date=datetime.now().strftime("%Y%m%d")
+    # date = "20230816"
 
     if not os.path.exists(PROJECT_PATH+'/files/readings'):
         os.makedirs(PROJECT_PATH+'/files/readings')
@@ -60,7 +61,7 @@ def getReadingsFromSite():
         with connection.cursor() as cursor:
             # SQL
             sql = "Select ls, pok, dat_write, tel from mmrg_datametr WHERE dat_unload is null AND unload = 0"
-            # sql = "Select ls, pok, dat_write, tel from mmrg_datametr WHERE dat_write between '2022-03-21 10:13:00' and '2022-03-25 10:00:00'"
+            # sql = "Select ls, pok, dat_write, tel from mmrg_datametr WHERE dat_write between '2022-08-16 00:00:01' and '2022-08-17 00:00:01'"
 
             cursor.execute(sql)
             print ("cursor.description: ", cursor.description)
