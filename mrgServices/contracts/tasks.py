@@ -1,25 +1,32 @@
-
+from main.celery import app
+from contracts.models import ContractVdgo
 
 @app.task
-def ls_upload( file_lines ):
-    for line in file_lines:
-        line_result = line.split('=')
-        if len(line_result) < 2:
+def createContractVdgoRecord(current_file_name):
+
+    file = open(current_file_name, 'r')
+
+    while True:
+        line_result = file.readline().split('=')
+        if len(line_result) < 3:
+            break
+        if not line_result:
             break
         try:
-            records = LsRecord.objects.filter(account_number_rng = line_result[0])
-            print(records)
+            records = ContractVdgo.objects.filter(account_number = line_result[0])
+            # print(records.values())
+
             if len(records) == 0:
-                LsRecord(
-                    account_number = str(line_result[1]).strip(),
-                    account_number_rng = str(line_result[0]).strip()
+                ContractVdgo(
+                    account_number = str(line_result[0]).strip(),
+                    account_number_rng = str(line_result[1]).strip(),
+                    account_address = str(line_result[2]).strip()
                 ).save()
             else:
                 print('already exist')
         except:
+            file.close
             print("Can't write LsRecord")
             pass
 
-        # прерываем цикл, если строка пустая
-        if not line:
-            break
+    file.close

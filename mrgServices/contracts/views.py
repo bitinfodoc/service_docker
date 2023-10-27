@@ -11,21 +11,24 @@ from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from contracts.serializers import CntractData, FileUploadSerializer
-from lsvalidate.models import LsRecord
-from lsvalidate.tasks import ls_upload
+from contracts.tasks import createContractVdgoRecord
 from django.conf import settings
 from contracts.models import ContractVdgo
-
-from contracts.utils import upload_image
-
 
 class ContractsVdgoUpload(viewsets.ViewSet):
 
     serializer_class = FileUploadSerializer
     def list(self, request):
+
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
     def create(self, request):
+
+        file_uploaded = request.FILES.get('file')
+        file_lines = file_uploaded.read().decode().splitlines()
+        createContractVdgoRecord.delay(file_lines)
+        # response = f"POST API and you have uploaded a {file_uploaded} file"
+
 
         return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
@@ -156,15 +159,7 @@ class ContractsVdgoView(viewsets.ViewSet):
         if request.data.get('consent'):
             contract.consent = request.data.get('consent')
 
-
         contract.save()
-
-
-
-        # if request.data.get("passport_scan_second"):
-        #     upload_image(request.data.get("account_number"), 'паспорт_2', request.data.get("passport_scan_second"))
-        #     print('hello file')
-
 
         return Response(json.dumps({'message': "Uploaded"}), status=200)
 

@@ -45,7 +45,7 @@ class ContractVdgo(models.Model):
     certificate_fifth = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат пятый',)
     certificate_last = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат шестой',)
 
-    phone = models.CharField(default='', blank=True, null=True, unique=False,  max_length=14, verbose_name='Телефон')
+    phone = models.CharField(default='', blank=True, null=True, unique=False,  max_length=16, verbose_name='Телефон')
     email = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Емайл')
     confirm = models.BooleanField(default=False, verbose_name='Согласие с политикой')
     consent = models.BooleanField(default=False, max_length=14, verbose_name='Подтверждение корректности данных')
