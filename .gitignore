@@ -9,7 +9,7 @@ mrgServices/reestrs/
 mrgServices/db.sqlite3
 reestrs/
 files/
-static/
+mrgServices/static/
 
 mrgServices/main/settings.py
 mrgServices/Dockerfile
