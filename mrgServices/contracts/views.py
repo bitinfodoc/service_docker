@@ -26,7 +26,7 @@ class ContractsVdgoUpload(viewsets.ViewSet):
 
         file_uploaded = request.FILES.get('file')
         file_lines = file_uploaded.read().decode().splitlines()
-        createContractVdgoRecord.delay(file_lines)
+        createContractVdgoRecord.delay(file_uploaded)
         # response = f"POST API and you have uploaded a {file_uploaded} file"
 
 
