@@ -31,6 +31,8 @@ services:
     # Внешний том(volume) и место где он будет подключен внутри контейнера
     volumes:
       - db:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
     environment:
       # Учетные данные, которые можно будет переопределить
       - POSTGRES_USER=${DB_USER}

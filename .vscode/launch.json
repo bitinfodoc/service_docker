@@ -1,0 +1,99 @@
+{
+    "configurations": [
+
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\mrgServices\\manage.py",
+            "cwd": "${workspaceFolder}\\mrgServices\\",
+            "python": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\python.exe",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\python.exe",
+                "DEBUG": "1",
+                "SECRET_KEY": "secretkey",
+                "ALLOWED_HOSTS": "gpbt.rgk56.ru 0.0.0.0 127.0.0.1 localhost",
+                "REDIS_HOST": "redis",
+                "EMAIL_HOST": "10.4.156.12",
+                "EMAIL_USE_TLS": "1",
+                "EMAIL_PORT": "25",
+                "EMAIL_HOST_USER": "p.blagovisnyi@mail.org056.ru",
+                "EMAIL_HOST_PASSWORD": "Q1W2t54",
+
+                "SITE_BASE_HOST": "mysql.hosting.nic.ru",
+                "SITE_BASE_USER": "c17565_conn",
+                "SITE_BASE_PASSWORD": "Jlbcctz1989",
+                "SITE_BASE_DB": "c17565_mrgmod",
+                "SITE_BASE_CHARSET": "cp1251",
+
+                "DB_NAME": "db",
+                "DB_USER": "user",
+                "DB_PASS": "password",
+                "DB_HOST": "127.0.0.1",
+                "DB_POST": "5432"
+            }
+        },
+        {
+            "name": "Python: Celery",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\celery.exe",
+
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/mrgServices/",
+            "env": {
+                "DEBUG": "1",
+                "SECRET_KEY": "secretkey",
+                "ALLOWED_HOSTS": "localhost 127.0.0.1 [::1]",
+                "BOT_TOKEN": "6114542695:AAG3z5edWR65i1o-qKBiwjSQz-LfXAG2gHo",
+                "REDIS_HOST": "127.0.0.1",
+                "BOT_URL": "https://api.telegram.org/bot",
+                "CHANNEL_ID": "@poster_bot_test",
+                "CSRF_TRUSTED_ORIGINS": "https://birds.stopscam.ru http://127.0.0.1 http://127.0.0.1:1337 http://0.0.0.0",
+                "DB_HOST": "127.0.0.1",
+                "DB_PORT": "5432",
+            },
+            "args": [
+                "-A",
+                "main",
+                "worker",
+                "-l",
+                "info",
+            ]
+        },
+        {
+            "name": "Beat",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\celery.exe",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/mrgServices/",
+            "env": {
+                "DEBUG": "1",
+                "SECRET_KEY": "secretkey",
+                "ALLOWED_HOSTS": "localhost 127.0.0.1 [::1]",
+                "BOT_TOKEN": "6114542695:AAG3z5edWR65i1o-qKBiwjSQz-LfXAG2gHo",
+                "REDIS_HOST": "127.0.0.1",
+                "BOT_URL": "https://api.telegram.org/bot",
+                "CHANNEL_ID": "@poster_bot_test",
+                "CSRF_TRUSTED_ORIGINS": "https://birds.stopscam.ru http://127.0.0.1 http://127.0.0.1:1337 http://0.0.0.0",
+                "DB_HOST": "127.0.0.1",
+                "DB_PORT": "5432",
+            },
+            "args": [
+                "-A",
+                "main",
+                "beat",
+                "-l",
+                "info",
+                "-S",
+                "django"
+            ]
+        },
+    ]
+}

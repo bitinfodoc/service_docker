@@ -2,11 +2,14 @@
 .env
 
 mrgServices/venv/
+mrgServices/_venv/
 mrgServices/files/
+mrgServices/media/
 mrgServices/reestrs/
 mrgServices/db.sqlite3
 reestrs/
 files/
+static/
 
 mrgServices/main/settings.py
 mrgServices/Dockerfile
