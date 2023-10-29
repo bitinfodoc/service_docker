@@ -21,7 +21,10 @@ class ContractVdgoAdmin(admin.ModelAdmin):
         (
             None,
             {
-                "fields": [("id", "created_date", "account_number", "account_number_rng")],
+                "fields": [
+                        ("id", "created_date", "last_update_date", "is_sended") ,
+                        ("account_number", "account_number_rng", "account_address")
+                    ],
             },
         ),
         (

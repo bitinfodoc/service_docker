@@ -23,29 +23,45 @@ class ContractsVdgoUpload(viewsets.ViewSet):
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
     def create(self, request):
+        print('add fileviews')
 
         file_uploaded = request.FILES.get('file')
         file_lines = file_uploaded.read().decode().splitlines()
-        createContractVdgoRecord.delay(file_uploaded)
+
+        createContractVdgoRecord.delay(file_lines)
         # response = f"POST API and you have uploaded a {file_uploaded} file"
-
-
         return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
 
-# Create your views here.
+# Вьюс для Контрактов.
 class ContractsVdgoView(viewsets.ViewSet):
 
     serializer_class = CntractData
 
 
     def list(self, request):
-
+        ls = request.GET.get("ls")
+        print(ls)
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
 
     def create(self, request):
+        ls = str(request.data.get('account_number'))
+        self.update_conracts_vdgo(request, ls)
         return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
+
+    def retrieve(self, request, pk=None):
+
+        if len(pk) == 8: queryset = ContractVdgo.objects.filter(account_number = pk)
+        else: queryset = ContractVdgo.objects.filter(account_number_rng = ls)
+
+        if len(queryset) == 0:
+            response = False
+            return Response(response, status=204)
+        else:
+            address = queryset.first()
+            return Response(address.account_address, status=200)
+
 
     def update(self, request, pk=None):
 
@@ -58,13 +74,20 @@ class ContractsVdgoView(viewsets.ViewSet):
         # out.write(file_uploaded.read().decode())
         # out.close
 
-        print(request.data)
-        print(request.data.get('account_number'))
-        # print(request.data['passport_scan_first'])
-        print(request.data.get("passport_scan_first"))
-        print(request.FILES.get('passport_scan_second'))
+        self.update_conracts_vdgo(request, pk )
 
-        contract = ContractVdgo.objects.get(account_number=pk)
+        return Response(json.dumps({'message': "Uploaded"}), status=200)
+
+    def delete(self, request):
+        response_text = 'No DEBUG. No data delited.'
+        if settings.DEBUG == 1:
+            ContractVdgo.objects.all().delete()
+            response_text = 'All data delited'
+        return Response({response_text})
+
+    def update_conracts_vdgo(self, request, account_number):
+
+        contract = ContractVdgo.objects.get(account_number=account_number)
 
         # фио в паспорте
         if request.data.get('passport_name'):
@@ -160,12 +183,3 @@ class ContractsVdgoView(viewsets.ViewSet):
             contract.consent = request.data.get('consent')
 
         contract.save()
-
-        return Response(json.dumps({'message': "Uploaded"}), status=200)
-
-    def delete(self, request):
-        response_text = 'No DEBUG. No data delited.'
-        if settings.DEBUG == 1:
-            LsRecord.objects.all().delete()
-            response_text = 'All data delited'
-        return Response({response_text})

@@ -10,10 +10,13 @@ def createContractVdgoRecord(current_file_name):
 
     while True:
         line_result = file.readline().split('=')
-        if len(line_result) < 2:
+        # print(line_result)
+        # break
+        if len(line_result) < 3:
             break
         if not line_result:
             break
+
         try:
             records = ContractVdgo.objects.filter(account_number = line_result[0])
             # print(records.values())
