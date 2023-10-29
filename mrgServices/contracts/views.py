@@ -47,13 +47,13 @@ class ContractsVdgoView(viewsets.ViewSet):
 
     def create(self, request):
         ls = str(request.data.get('account_number'))
-        self.update_conracts_vdgo(request, ls)
+        self.update_contracts_vdgo(request, ls)
         return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
     def retrieve(self, request, pk=None):
 
         if len(pk) == 8: queryset = ContractVdgo.objects.filter(account_number = pk)
-        else: queryset = ContractVdgo.objects.filter(account_number_rng = ls)
+        else: queryset = ContractVdgo.objects.filter(account_number_rng = pk)
 
         if len(queryset) == 0:
             response = False
@@ -74,7 +74,7 @@ class ContractsVdgoView(viewsets.ViewSet):
         # out.write(file_uploaded.read().decode())
         # out.close
 
-        self.update_conracts_vdgo(request, pk )
+        self.update_contracts_vdgo(request, pk )
 
         return Response(json.dumps({'message': "Uploaded"}), status=200)
 
@@ -85,9 +85,10 @@ class ContractsVdgoView(viewsets.ViewSet):
             response_text = 'All data delited'
         return Response({response_text})
 
-    def update_conracts_vdgo(self, request, account_number):
+    def update_contracts_vdgo(self, request, account_number):
 
-        contract = ContractVdgo.objects.get(account_number=account_number)
+        if len(account_number) == 8: queryset = ContractVdgo.objects.get(account_number = account_number)
+        else: contract = ContractVdgo.objects.get(account_number_rng = account_number)
 
         # фио в паспорте
         if request.data.get('passport_name'):
