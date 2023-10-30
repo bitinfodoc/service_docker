@@ -87,7 +87,7 @@ class ContractsVdgoView(viewsets.ViewSet):
 
     def update_contracts_vdgo(self, request, account_number):
 
-        if len(account_number) == 8: queryset = ContractVdgo.objects.get(account_number = account_number)
+        if len(account_number) == 8: contract = ContractVdgo.objects.get(account_number = account_number)
         else: contract = ContractVdgo.objects.get(account_number_rng = account_number)
 
         # фио в паспорте
@@ -129,10 +129,12 @@ class ContractsVdgoView(viewsets.ViewSet):
         # скан первой страницы паспорта
         if request.FILES.get('passport_scan_first'):
             contract.passport_scan_first = request.FILES.get('passport_scan_first')
+            contract.passport_scan_first.name = "pass_1_" + account_number
 
         # скан второй страницы паспорта
         if request.FILES.get('passport_scan_second'):
             contract.passport_scan_second = request.FILES.get('passport_scan_second')
+            contract.passport_scan_second.name = "pass_2_" + account_number
 
 
         # номер снилс
@@ -151,6 +153,7 @@ class ContractsVdgoView(viewsets.ViewSet):
         # скан инн
         if request.FILES.get('inn_first'):
             contract.inn_first = request.FILES.get('inn_first')
+            contract.inn_first.name = "inn_" + account_number
 
         # скан ЕГРН
         if request.FILES.get('certificate_first'):
