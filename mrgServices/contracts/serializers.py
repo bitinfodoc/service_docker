@@ -1,5 +1,6 @@
 # from .models import RngBaseRecord
 from rest_framework import serializers
+# from base.services import delete_old_file
 from contracts.models import ContractVdgo
 
 class CntractData(serializers.Serializer):
@@ -20,6 +21,7 @@ class CntractData(serializers.Serializer):
 
     passport_scan_first = serializers.FileField()
     passport_scan_second = serializers.FileField()
+
 
 class FileUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
