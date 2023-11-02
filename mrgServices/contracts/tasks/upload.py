@@ -4,7 +4,7 @@ import os
 from django.conf import settings
 
 @app.task
-def createContractVdgoRecord(file_lines_array):
+def create_contract_record(file_lines_array):
     # print(current_file_name)
 
     # file_path = settings.MEDIA_ROOT + '/upload_files'
@@ -43,5 +43,5 @@ def createContractVdgoRecord(file_lines_array):
             # file.close
             print("Can't write Contract VDGO Record")
             pass
-
+    # return True
     # file.close

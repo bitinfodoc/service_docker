@@ -11,9 +11,10 @@ from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from contracts.serializers import CntractData, FileUploadSerializer
-from contracts.tasks import createContractVdgoRecord
+from contracts.tasks import create_contract_record, copy_to_network
 from django.conf import settings
 from contracts.models import ContractVdgo
+from datetime import datetime
 
 class ContractsVdgoUpload(viewsets.ViewSet):
 
@@ -22,13 +23,19 @@ class ContractsVdgoUpload(viewsets.ViewSet):
 
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
+    def retrieve(self, request, pk=None):
+
+        if pk == 'send':
+            copy_to_network.delay()
+            return Response({'message': "Sended"}, status=200)
+
     def create(self, request):
         print('add fileviews')
 
         file_uploaded = request.FILES.get('file')
         file_lines = file_uploaded.read().decode().splitlines()
 
-        createContractVdgoRecord.delay(file_lines)
+        create_contract_record.delay(file_lines)
         # response = f"POST API and you have uploaded a {file_uploaded} file"
         return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
 
@@ -59,8 +66,12 @@ class ContractsVdgoView(viewsets.ViewSet):
             response = False
             return Response(response, status=204)
         else:
-            address = queryset.first()
-            return Response(address.account_address, status=200)
+            contract = queryset.first()
+            if contract.consent == True:
+                response = True
+                return Response(response, status=208)
+            else:
+                return Response(contract.account_address, status=200)
 
 
     def update(self, request, pk=None):
@@ -134,13 +145,13 @@ class ContractsVdgoView(viewsets.ViewSet):
         if request.FILES.get('passport_scan_first'):
             contract.passport_scan_first.delete(save=False)
             contract.passport_scan_first = request.FILES.get('passport_scan_first')
-            contract.passport_scan_first.name = "pass_1_" + account_number +'.'+ self.extension_file(request.FILES.get('passport_scan_first'))
+            contract.passport_scan_first.name = "pass_1_" + account_number + self.extension_file(request.FILES.get('passport_scan_first'))
 
         # скан второй страницы паспорта
         if request.FILES.get('passport_scan_second'):
             contract.passport_scan_second.delete(save=False)
             contract.passport_scan_second = request.FILES.get('passport_scan_second')
-            contract.passport_scan_second.name = "pass_2_" + account_number +'.'+ self.extension_file(request.FILES.get('passport_scan_second'))
+            contract.passport_scan_second.name = "pass_2_" + account_number + self.extension_file(request.FILES.get('passport_scan_second'))
 
 
         # номер снилс
@@ -151,7 +162,7 @@ class ContractsVdgoView(viewsets.ViewSet):
         if request.FILES.get('snils_first'):
             contract.snils_first.delete(save=False)
             contract.snils_first = request.FILES.get('snils_first')
-            contract.snils_first.name = "snils_first_" + account_number +'.'+ self.extension_file(request.FILES.get('snils_first'))
+            contract.snils_first.name = "snils_first_" + account_number + self.extension_file(request.FILES.get('snils_first'))
 
 
         # номер инн
@@ -162,33 +173,33 @@ class ContractsVdgoView(viewsets.ViewSet):
         if request.FILES.get('inn_first'):
             contract.inn_first.delete(save=False)
             contract.inn_first = request.FILES.get('inn_first')
-            contract.inn_first.name = "inn_" + account_number +'.'+ self.extension_file(request.FILES.get('inn_first'))
+            contract.inn_first.name = "inn_" + account_number + self.extension_file(request.FILES.get('inn_first'))
 
         # скан ЕГРН
         if request.FILES.get('certificate_first'):
             contract.certificate_first.delete(save=False)
             contract.certificate_first = request.FILES.get('certificate_first')
-            contract.certificate_first.name = "certificate_first_" + account_number +'.'+ self.extension_file(request.FILES.get('certificate_first'))
+            contract.certificate_first.name = "certificate_first_" + account_number + self.extension_file(request.FILES.get('certificate_first'))
         if request.FILES.get('certificate_second'):
             contract.certificate_second.delete(save=False)
             contract.certificate_second = request.FILES.get('certificate_second')
-            contract.certificate_second.name = "certificate_second_" + account_number +'.'+ self.extension_file(request.FILES.get('certificate_second'))
+            contract.certificate_second.name = "certificate_second_" + account_number + self.extension_file(request.FILES.get('certificate_second'))
         if request.FILES.get('certificate_therd'):
             contract.certificate_therd.delete(save=False)
             contract.certificate_therd = request.FILES.get('certificate_therd')
-            contract.certificate_therd.name = "certificate_therd_" + account_number +'.'+ self.extension_file(request.FILES.get('certificate_therd'))
+            contract.certificate_therd.name = "certificate_therd_" + account_number + self.extension_file(request.FILES.get('certificate_therd'))
         if request.FILES.get('certificate_fourth'):
             contract.certificate_fourth.delete(save=False)
             contract.certificate_fourth = request.FILES.get('certificate_fourth')
-            contract.certificate_fourth.name = "certificate_fourth_" + account_number +'.'+ self.extension_file(request.FILES.get('certificate_fourth'))
+            contract.certificate_fourth.name = "certificate_fourth_" + account_number + self.extension_file(request.FILES.get('certificate_fourth'))
         if request.FILES.get('certificate_fifth'):
             contract.certificate_fifth.delete(save=False)
             contract.certificate_fifth = request.FILES.get('certificate_fifth')
-            contract.certificate_fifth.name = "certificate_fifth_" + account_number +'.'+ self.extension_file(request.FILES.get('certificate_fifth'))
+            contract.certificate_fifth.name = "certificate_fifth_" + account_number + self.extension_file(request.FILES.get('certificate_fifth'))
         if request.FILES.get('certificate_last'):
             contract.certificate_last.delete(save=False)
             contract.certificate_last = request.FILES.get('certificate_last')
-            contract.certificate_last.name = "certificate_last_" + account_number +'.'+ self.extension_file(request.FILES.get('certificate_last'))
+            contract.certificate_last.name = "certificate_last_" + account_number + self.extension_file(request.FILES.get('certificate_last'))
 
 
         # номер телефона
@@ -206,5 +217,7 @@ class ContractsVdgoView(viewsets.ViewSet):
         # подтверждение
         if request.data.get('consent'):
             contract.consent = request.data.get('consent')
+
+        contract.last_update_date = datetime.now()
 
         contract.save()
