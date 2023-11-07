@@ -5,7 +5,7 @@ mrgServices/venv/
 mrgServices/_venv/
 mrgServices/files/
 mrgServices/media/
-mrgServices/reestrs/
+mrgServices/reesters/
 mrgServices/db.sqlite3
 reestrs/
 files/

@@ -218,6 +218,10 @@ class ContractsVdgoView(viewsets.ViewSet):
         if request.data.get('consent'):
             contract.consent = request.data.get('consent')
 
+        # прислать смс
+        if request.data.get('sms'):
+            contract.sms = request.data.get('sms')
+
         contract.last_update_date = datetime.now()
 
         contract.save()

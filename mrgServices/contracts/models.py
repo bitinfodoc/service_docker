@@ -48,9 +48,10 @@ class ContractVdgo(models.Model):
     phone = models.CharField(default='', blank=True, null=True, unique=False,  max_length=16, verbose_name='Телефон')
     email = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Емайл')
     confirm = models.BooleanField(default=False, verbose_name='Согласие с политикой')
-    consent = models.BooleanField(default=False, max_length=14, verbose_name='Подтверждение корректности данных')
+    consent = models.BooleanField(default=False, verbose_name='Подтверждение корректности данных')
 
-    is_sended = models.BooleanField(default=False, max_length=14, verbose_name='Отправлено в реестр')
+    sms = models.BooleanField(default=False, verbose_name='СМС')
+    is_sended = models.BooleanField(default=False, verbose_name='Отправлено в реестр')
 
 
     class Meta:

@@ -9,6 +9,7 @@ services:
     volumes:
       - ./files:/app/files
       - ./reestrs:/app/reestrs
+      - ./media:/app/media
       # - assistant_data:/app/import
       # - type: volume
       #   source: assistant_data
@@ -82,6 +83,7 @@ volumes:
   db:
   files:
   reestrs:
+  media:
   # assistant_data:
   #   driver: local
   #   driver_opts:
