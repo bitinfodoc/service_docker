@@ -10,7 +10,7 @@ def move_files(folders):
         folder_from = folder
         ls = folder.split('\\')[-1]
 
-        folder_to = os.path.join(str(settings.SHARED_DIR), ls)
+        folder_to = os.path.join(str(settings.SHARED_DIR), 'reesters', ls)
         print(folder_to)
 
         if not os.path.exists(folder_to):
