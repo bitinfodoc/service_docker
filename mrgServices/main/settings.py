@@ -145,7 +145,6 @@ else:
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
 SHARED_DIR = os.environ.get("SHARED_DIR", '/')
 
 # Default primary key field type

@@ -3,14 +3,17 @@ import shutil
 from django.conf import settings
 
 def move_files(folders):
-    print(folders)
+    # print(folders)
 
     for folder in folders:
 
         folder_from = folder
         ls = folder.split('\\')[-1]
 
-        folder_to = os.path.join(str(settings.SHARED_DIR), 'reesters', ls)
+        folder_to = os.path.join(settings.SHARED_DIR, 'reesters', ls)
+        print('folder from')
+        print(folder_from)
+        print('folder to')
         print(folder_to)
 
         if not os.path.exists(folder_to):
