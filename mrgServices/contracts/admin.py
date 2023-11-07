@@ -73,7 +73,7 @@ class ContractVdgoAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {"widget": Textarea},
     }
-    readonly_fields = ('id', 'created_date', )
+    readonly_fields = ('id', 'created_date', 'account_number', 'account_number_rng', 'last_update_date', "account_address")
     list_display = [ 'account_number', 'account_number_rng', 'last_update_date', 'consent', 'is_sended' ]
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
