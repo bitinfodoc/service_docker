@@ -10,6 +10,7 @@ mrgServices/db.sqlite3
 reestrs/
 reesters/
 files/
+vdgo/
 mrgServices/static/
 
 mrgServices/main/settings.py
