@@ -40,8 +40,9 @@ def csv_contract(item):
         print(file_path)
 
         if not os.path.exists(folder_path):
+            print('file not exist')
             os.mkdir(folder_path)
-
+        print('file pre open')
         with open(file_path, 'w', encoding='UTF-8') as file:
             print('file opend')
             writer = csv.writer(file, delimiter = ";")
