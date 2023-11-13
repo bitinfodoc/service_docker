@@ -13,6 +13,8 @@ def move_files(folders):
 
         folder_to = os.path.join(settings.SHARED_DIR, ls)
 
+        print('------------------')
+        print(settings.SHARED_DIR)
         print('folder from')
         print(folder_from)
         print('folder to')
