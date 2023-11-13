@@ -36,12 +36,14 @@ def csv_contract(item):
 
         vdgo_folder_path = os.path.join(settings.MEDIA_ROOT,'vdgo')
         if not os.path.exists(vdgo_folder_path):
+            print('vdgo folder is not exist')
             os.mkdir(vdgo_folder_path)
 
         folder_path = os.path.join(vdgo_folder_path, item.account_number)
         file_path = os.path.join(folder_path, file_mame)
 
         if not os.path.exists(folder_path):
+            print('ls folder is not exist')
             os.mkdir(folder_path)
 
         with open(file_path, 'w', encoding='UTF-8') as file:
