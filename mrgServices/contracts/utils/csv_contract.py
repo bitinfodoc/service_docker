@@ -33,7 +33,7 @@ def format_date(string = None):
 def csv_contract(item):
     try:
         file_mame = item.account_number + '.txt'
-        folder_path = os.path.join(settings.MEDIA_ROOT,'vdgo', 'сайт_' + item.account_number)
+        folder_path = os.path.join(settings.MEDIA_ROOT,'vdgo', item.account_number)
         file_path = os.path.join(folder_path, file_mame)
 
         if not os.path.exists(folder_path):

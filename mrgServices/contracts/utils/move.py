@@ -13,7 +13,7 @@ def move_files(folders):
 
         print(settings.SHARED_DIR.split(" "))
         # shared_dir = settings.SHARED_DIR.split(" ")
-        folder_to = os.path.join(settings.SHARED_DIR, 'vdgo', ls)
+        folder_to = os.path.join(settings.SHARED_DIR, 'vdgo', 'сайт_' + ls)
 
         print('------------------')
         print(settings.SHARED_DIR)
@@ -23,6 +23,7 @@ def move_files(folders):
         print(folder_to)
 
         if not os.path.exists(folder_to):
+            print(folder_to)
             os.mkdir(folder_to)
 
         for f in os.listdir(folder_from):
