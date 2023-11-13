@@ -9,8 +9,9 @@ def move_files(folders):
 
         folder_from = folder
         ls = folder.split('\\')[-1]
+        print(ls)
 
-        folder_to = os.path.join(settings.SHARED_DIR, 'reesters', ls)
+        folder_to = os.path.join(settings.SHARED_DIR, ls)
         print('folder from')
         print(folder_from)
         print('folder to')
