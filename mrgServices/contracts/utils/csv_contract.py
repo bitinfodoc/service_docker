@@ -33,21 +33,19 @@ def format_date(string = None):
 def csv_contract(item):
     try:
         file_mame = item.account_number + '.txt'
-        print(file_mame)
-        folder_path = os.path.join(settings.MEDIA_ROOT,'vdgo', item.account_number)
-        print(folder_path)
+
+        vdgo_folder_path = os.path.join(settings.MEDIA_ROOT,'vdgo')
+        if not os.path.exists(vdgo_folder_path):
+            os.mkdir(vdgo_folder_path)
+
+        folder_path = os.path.join(vdgo_folder_path, item.account_number)
         file_path = os.path.join(folder_path, file_mame)
-        print(file_path)
 
         if not os.path.exists(folder_path):
-            print('file not exist')
             os.mkdir(folder_path)
-        print('file pre open')
-        with open(file_path, 'w', encoding='UTF-8') as file:
-            print('file opend')
-            writer = csv.writer(file, delimiter = ";")
-            print('delimiter setted')
 
+        with open(file_path, 'w', encoding='UTF-8') as file:
+            writer = csv.writer(file, delimiter = ";")
             writer.writerow([
                 item.account_number,
                 item.passport_name,
