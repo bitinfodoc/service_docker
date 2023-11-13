@@ -3,23 +3,32 @@ import os
 from django.conf import settings
 
 
-def remove_symbols(string):
-   trans_table = {
-    ord('(') : None,
-    ord(')') : None,
-    ord('-') : None,
-    ord(',') : None,
-    ord(':') : None,
-    ord('.') : None,
-    ord(' ') : None,
+def remove_symbols(string = None):
+    if string == None:
+        return ""
+    trans_table = {
+        ord('(') : None,
+        ord(')') : None,
+        ord('-') : None,
+        ord(',') : None,
+        ord(':') : None,
+        ord('.') : None,
+        ord(' ') : None,
     }
-   return string.translate(trans_table)
+    print('--- String is ' + string)
+    print('string formated')
 
-def format_date(string):
-   trans_table = {
-    ord('-') : ord('.'),
+    return string.translate(trans_table)
+
+def format_date(string = None):
+    if string == None:
+        return ""
+    trans_table = {
+        ord('-') : ord('.'),
     }
-   return string.translate(trans_table)
+    print('--- Daste is ' + string)
+    print('date formated')
+    return string.translate(trans_table)
 
 def csv_contract(item):
     try:
@@ -31,7 +40,10 @@ def csv_contract(item):
             os.mkdir(folder_path)
 
         with open(file_path, 'w', encoding='UTF-8') as file:
+            print('file opend')
             writer = csv.writer(file, delimiter = ";")
+            print('delimiter setted')
+
             writer.writerow([
                 item.account_number,
                 item.passport_name,
@@ -49,7 +61,8 @@ def csv_contract(item):
                 item.inn_number,
                 int(item.sms),
             ])
-
+        print('file is writed')
         return folder_path
     except:
+        print('error')
         return "error"
