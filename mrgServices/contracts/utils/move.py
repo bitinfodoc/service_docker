@@ -11,7 +11,8 @@ def move_files(folders):
         ls = os.path.split(folder_from)[-1]
         print(ls)
 
-        folder_to = os.path.join(settings.SHARED_DIR, ls)
+        print(settings.SHARED_DIR.split(" "))
+        folder_to = os.path.join(settings.SHARED_DIR, 'vdgo', ls)
 
         print('------------------')
         print(settings.SHARED_DIR)

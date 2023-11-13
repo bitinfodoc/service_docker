@@ -37,7 +37,7 @@
                 "DB_HOST": "127.0.0.1",
                 "DB_POST": "5432",
 
-                "SHARED_DIR": "${workspaceFolder}\\reesters",
+                "SHARED_DIR": "${workspaceFolder} reesters",
                 "CSRF_TRUSTED_ORIGINS": "http://127.0.0.1"
             }
         },
