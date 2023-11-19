@@ -4,8 +4,9 @@ import os
 from django.conf import settings
 
 def pdf_contract(contract):
-    path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    if settings.DEBUG == True:
+        path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
     print(contract.account_number)
     try:

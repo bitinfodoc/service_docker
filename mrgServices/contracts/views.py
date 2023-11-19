@@ -81,6 +81,7 @@ class ContractsVdgoView(viewsets.ViewSet):
 
             if request.data.get('consent'):
                 contract_pdf_path = pdf_contract(contract)
+                print(contract_pdf_path)
                 if contract_pdf_path['pdf_path']:
                     contract.contract_pdf = contract_pdf_path['pdf_path']
                     contract.save()
