@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.forms import FileField
+from contracts.validators import validate_file_extension
 # Create your models here.
 
 def upload_to(instance, filename):
@@ -15,7 +15,10 @@ class ContractVdgo(models.Model):
 
     account_number = models.CharField(default='', null=True, blank=True, unique=False,  max_length=8, verbose_name='Лицевой счёт (8)')
     account_number_rng = models.CharField(default='', blank=True, null=True, unique=False,  max_length=12, verbose_name='Лицевой счёт (12)')
-    account_address = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Адрес установки борудования')
+    account_address = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Адрес установки борудования', validators=[validate_file_extension])
+
+    contract_pdf = models.FileField(upload_to = upload_to, default = '', blank=True, verbose_name='Заполненный PDF')
+    contract_pdf_signed = models.FileField(upload_to = upload_to, default = '', blank=True, verbose_name='Подписанный PDF')
 
     passport_name = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='ФИО владельца договора')
     passport_place = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Место рождения')

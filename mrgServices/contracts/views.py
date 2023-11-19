@@ -12,6 +12,8 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from contracts.serializers import CntractData, FileUploadSerializer
 from contracts.tasks import create_contract_record, copy_to_network
+from contracts.utils import pdf_contract
+from contracts.validators import validate_account_number
 from django.conf import settings
 from contracts.models import ContractVdgo
 from datetime import datetime
@@ -28,6 +30,16 @@ class ContractsVdgoUpload(viewsets.ViewSet):
         if pk == 'send':
             copy_to_network.delay()
             return Response({'message': "Sended"}, status=200)
+
+        if pk == 'pdf':
+            contract = ContractVdgo.objects.filter(account_number = '14135100').first()
+            contract_pdf = pdf_contract(contract)
+            if contract_pdf != "error":
+                contract.contract_pdf = contract_pdf['pdf_path']
+                contract.save()
+                return Response({'message': "Sended"}, status=200)
+            else:
+                return Response({'message': "Error create file"}, status=400)
 
     def create(self, request):
         print('add fileviews')
@@ -54,13 +66,36 @@ class ContractsVdgoView(viewsets.ViewSet):
 
     def create(self, request):
         ls = str(request.data.get('account_number'))
-        self.update_contracts_vdgo(request, ls)
-        return HttpResponse(json.dumps({'message': "Uploaded"}), status=200)
+
+        # ls_i_valid = validate_account_number(ls)
+        print(validate_account_number(ls)["result"])
+        if validate_account_number(ls)["result"] == True:
+            if len(ls) == 8: contract = ContractVdgo.objects.filter(account_number = ls).first()
+            elif len(ls) == 12: contract = ContractVdgo.objects.filter(account_number_rng = ls).first()
+        else:
+            return HttpResponse(json.dumps({"result": False, 'message': "Not valid ls"}), status=201)
+        print("contract")
+        print(contract)
+        if contract != None:
+            self.update_contracts_vdgo(request, contract)
+
+            if request.data.get('consent'):
+                contract_pdf_path = pdf_contract(contract)
+                if contract_pdf_path['pdf_path']:
+                    contract.contract_pdf = contract_pdf_path['pdf_path']
+                    contract.save()
+                else:
+                    return HttpResponse(json.dumps({'message': "Cant create contract pdf file"}), status=401)
+        else:
+            return HttpResponse(json.dumps({"result": False,'message': "Account not found"}), status=201)
+
+        return HttpResponse(json.dumps({"result": True, 'message': "Uploaded"}), status=200)
 
     def retrieve(self, request, pk=None):
 
         if len(pk) == 8: queryset = ContractVdgo.objects.filter(account_number = pk)
-        else: queryset = ContractVdgo.objects.filter(account_number_rng = pk)
+        elif len(pk) == 12: queryset = ContractVdgo.objects.filter(account_number_rng = pk)
+        else: return Response(response, status=201)
 
         if len(queryset) == 0:
             response = False
@@ -76,17 +111,6 @@ class ContractsVdgoView(viewsets.ViewSet):
 
     def update(self, request, pk=None):
 
-        # file_uploaded = request.data['passport_scan_first']
-        # basename = os.path.basename(self.file_uploaded)
-        # print(basename)
-        # File(open(file_uploaded, 'rb'))
-
-        # out = open("img.png", "wb")
-        # out.write(file_uploaded.read().decode())
-        # out.close
-
-        self.update_contracts_vdgo(request, pk )
-
         return Response(json.dumps({'message': "Uploaded"}), status=200)
 
     def delete(self, request):
@@ -100,10 +124,12 @@ class ContractsVdgoView(viewsets.ViewSet):
         name, extension = os.path.splitext(file.name)
         return extension
 
-    def update_contracts_vdgo(self, request, account_number):
+    def update_contracts_vdgo(self, request, contract):
+        account_number = contract.account_number
 
-        if len(account_number) == 8: contract = ContractVdgo.objects.get(account_number = account_number)
-        else: contract = ContractVdgo.objects.get(account_number_rng = account_number)
+        valid_account = validate_account_number(account_number)
+        print(valid_account)
+
 
         # фио в паспорте
         if request.data.get('passport_name'):
@@ -212,11 +238,13 @@ class ContractsVdgoView(viewsets.ViewSet):
 
         # согласие
         if request.data.get('confirm'):
-            contract.confirm = request.data.get('confirm')
+            # contract.confirm = request.data.get('confirm')
+            contract.confirm = 1
 
         # подтверждение
         if request.data.get('consent'):
-            contract.consent = request.data.get('consent')
+            # contract.consent = request.data.get('consent')
+            contract.consent = 1
 
         # прислать смс
         if request.data.get('sms'):

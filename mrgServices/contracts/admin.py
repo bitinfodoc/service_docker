@@ -23,7 +23,8 @@ class ContractVdgoAdmin(admin.ModelAdmin):
             {
                 "fields": [
                         ("id", "created_date", "last_update_date", "is_sended") ,
-                        ("account_number", "account_number_rng", "account_address")
+                        ("account_number", "account_number_rng", "account_address"),
+                        ("contract_pdf", "contract_pdf_signed")
                     ],
             },
         ),

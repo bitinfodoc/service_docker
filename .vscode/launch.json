@@ -7,14 +7,14 @@
             "request": "launch",
             "program": "${workspaceFolder}\\mrgServices\\manage.py",
             "cwd": "${workspaceFolder}\\mrgServices\\",
-            "python": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\python.exe",
+            "python": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\python.exe",
             "args": [
                 "runserver"
             ],
             "django": true,
             "justMyCode": true,
             "env": {
-                "PYTHONPATH": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\python.exe",
+                "PYTHONPATH": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\python.exe",
                 "DEBUG": "1",
                 "SECRET_KEY": "secretkey",
                 "ALLOWED_HOSTS": "gpbt.rgk56.ru 0.0.0.0 127.0.0.1 localhost",
@@ -45,10 +45,10 @@
             "name": "Python: Celery",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\celery.exe",
+            "program": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\celery.exe",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}\\mrgServices\\",
-            "python": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\python.exe",
+            "python": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\python.exe",
             "env": {
                 "DEBUG": "1",
                 "SECRET_KEY": "secretkey",
@@ -61,7 +61,6 @@
                 "DB_HOST": "127.0.0.1",
                 "DB_PORT": "5432",
                 "SHARED_DIR": "${workspaceFolder}",
-
             },
             "args": [
                 "-A",
@@ -77,11 +76,11 @@
             "name": "Beat",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\celery.exe",
+            "program": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\celery.exe",
             "console": "integratedTerminal",
             "cwd": "${workspaceFolder}\\mrgServices\\",
             "env": {
-                "PYTHONPATH": "${workspaceFolder}\\mrgServices\\_venv\\Scripts\\python.exe",
+                "PYTHONPATH": "${workspaceFolder}\\mrgServices\\venv\\Scripts\\python.exe",
                 "DEBUG": "1",
                 "SECRET_KEY": "secretkey",
                 "ALLOWED_HOSTS": "gpbt.rgk56.ru 192.168.254.27 localhost 127.0.0.1 [::1]",

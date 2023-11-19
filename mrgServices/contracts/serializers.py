@@ -22,6 +22,17 @@ class CntractData(serializers.Serializer):
     passport_scan_first = serializers.FileField()
     passport_scan_second = serializers.FileField()
 
+    snils_number = serializers.CharField()
+    certificate_first = serializers.FileField()
+    certificate_second = serializers.FileField()
+    certificate_therd = serializers.FileField()
+    certificate_fourth = serializers.FileField()
+    certificate_fifth = serializers.FileField()
+    certificate_last = serializers.FileField()
+    phone = serializers.CharField()
+    email = serializers.CharField()
+    confirm = serializers.BooleanField()
+    consent = serializers.BooleanField()
 
 class FileUploadSerializer(serializers.Serializer):
     file = serializers.FileField()
