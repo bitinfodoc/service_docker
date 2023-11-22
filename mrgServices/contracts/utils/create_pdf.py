@@ -4,9 +4,10 @@ import os
 from django.conf import settings
 
 def pdf_contract(contract):
-    if settings.DEBUG == True:
-        path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+
+    print(os.name)
+    # if os.name == 'nt':
+
 
     print(contract.account_number)
     try:
@@ -35,7 +36,7 @@ def pdf_contract(contract):
             "sms": contract.sms,
         }
 
-
+        print('template data created')
         env = Environment(loader=FileSystemLoader('.'))
         template = env.get_template("templates/template.html")
 
@@ -54,20 +55,31 @@ def pdf_contract(contract):
             ],
             'no-outline': None
         }
-        vdgo_folder_path = os.path.join(settings.MEDIA_ROOT,'vdgo')
+        temp_folder_path = os.path.join(settings.MEDIA_ROOT,'tmp')
 
-        if not os.path.exists(vdgo_folder_path):
-            print('vdgo folder is not exist')
-            os.mkdir(vdgo_folder_path)
+        if not os.path.exists(temp_folder_path):
+            print('Temp folder is not exist')
+            os.mkdir(temp_folder_path)
+        print('account_number')
+        print(account_number)
+        file_mame = "unsigned_"+account_number+".pdf"
 
-        file_mame = "неподписанный_"+account_number+".pdf"
-        folder_path = os.path.join(vdgo_folder_path, account_number)
+        file_path = os.path.join(temp_folder_path, file_mame)
 
-        file_path = os.path.join(folder_path, file_mame)
+        print(file_path)
 
-        pdfkit.from_string(pdf_template, file_path, options=options, configuration=config)
 
-        return {"pdf_path": file_path}
+        if os.name == 'nt':
+            print("hello nt")
+            path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+            config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+            res = pdfkit.from_string(pdf_template, file_path, options=options, configuration=config)
+        # print(res)
+        else:
+            pdfkit.from_string(pdf_template, file_path, options=options)
+        # result_file_path = os.path.join()
+
+        return {"pdf_path": file_path, "pdf_name": file_mame, "error": False}
 
     except:
         return {"error": "cant create file PDF"}

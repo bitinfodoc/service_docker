@@ -3,15 +3,13 @@
 <style>
     body {
         /* width: 831.52px; */
-        font-size:9pt;
-        /* font-family:"Arial",sans-serif; */
-        font-family:"Calibri",sans-serif;
+        font-size:10pt;
+        font-family: "Arial",sans-serif;
         /* letter-spacing: .11em */
     }
     table p,
     li {
         /* font-size:9pt;font-family:"Arial",sans-serif; */
-        font-family:"Calibri",sans-serif;
         /* letter-spacing: .11em */
     }
 
@@ -83,7 +81,7 @@
         margin:5px;
         margin-bottom:.0001pt;
         line-height: 10.0pt;
-        font-size:11px;
+        font-size:10pt;
         font-family:"Arial",sans-serif;
 
     }
@@ -127,80 +125,90 @@
         в многоквартирном&nbsp;доме / внутридомового&nbsp;газового оборудования в&nbsp;жилом&nbsp;доме (домовладении)</u></p>
 
     <p >&nbsp;</p>
-    <p ><strong>Я</strong>, <u>{{name}}</u></br>
+    <p ><strong>Я</strong>, <span style="font-size: 22pt"><u>{{name}}</u></span></br>
     <span style="font-size:8pt">(фамилия, имя, отчество)</span></p>
 
 </div>
 
 
 
-<table class="table_data">
+<table class="table_data" style="font-size: 8pt;">
     <tbody>
         <tr>
-            <td olspan="1" style="width: 100pt;border: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
+            <td colspan="2" style="border: 1pt solid windowtext;">
                 <p><strong>дата рождения</strong></br></p>
             </td>
-            <td colspan="1" style="width: 80pt;">
+            <td colspan="2" >
                 <p>{{passport_birth_date}}</p>
             </td>
-            <td colspan="2" style="width: 84.1pt;">
-                <p><strong>паспорт серия</strong></p>
+            <td colspan="2" >
+                <p><strong>место рождения</strong></br></p>
             </td>
-            <td olspan="2" style="width: 100.15pt;">
-                <p>{{passport_serial}}</p>
-            </td>
-            <td colspan="1" style="width: 79.65pt;">
-                <p><strong>паспорт номер</strong></p>
-            </td>
-            <td colspan="1" style="width: 120.9pt;">
-                <p>{{passport_number}}</p>
+            <td colspan="6">
+                <p>{{passport_place}}</p>
             </td>
         </tr>
         <tr>
-            <td colspan="1" style="width: 100pt;border: 1pt solid windowtext;">
+            <td colspan="2" style="border: 1pt solid windowtext;">
+                <p><strong>паспорт серия</strong></p>
+            </td>
+            <td colspan="1">
+                <p>{{passport_serial}}</p>
+            </td>
+            <td colspan="2">
+                <p><strong>паспорт номер</strong></p>
+            </td>
+            <td colspan="1">
+                <p>{{passport_number}}</p>
+            </td>
+            <td colspan="2" style="width: 100pt;border: 1pt solid windowtext;">
                 <p><strong>дата выдачи паспорта</strong></p>
             </td>
-            <td olspan="1" style="width: 57.15pt;">
+            <td colspan="2">
                 <p>{{passport_issued_date}}</p>
             </td>
-            <td olspan="1" style="width: 84.1pt;">
-                <p><strong>кем выдан</strong></p>
-            </td>
-            <td colspan="2" style="width: 191.4pt;">
-                <p>{{passport_issued}}</p>
-            </td>
-            <td colspan="1" style="width: 92.1pt;">
+            <td colspan="1">
                 <p><strong>код подразделения</strong></p>
             </td>
-            <td colspan="1"  style="width: 45.05pt;">
+            <td colspan="1">
                 <p>{{passport_issued_code}}</p>
             </td>
         </tr>
         <tr>
-            <td style="width: 100pt;border: 1pt solid windowtext;">
+
+            <td colspan="2" style="border: 1pt solid windowtext;">
+                <p><strong>кем выдан</strong></p>
+            </td>
+            <td colspan="10">
+                <p>{{passport_issued}}</p>
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="border: 1pt solid windowtext;">
                 <p><strong>СНИЛС №</strong></p>
             </td>
-            <td colspan="2" style="width: 80.7pt;">
+            <td colspan="2">
                 <p>{{snils_number}}</p>
             </td>
-            <td colspan="1" style="width: 84.1pt;">
+            <td colspan="2">
                 <p><strong>№ тел.</strong></p>
             </td>
-            <td style="width: 100.15pt;">
+            <td colspan="2">
                 <p>{{phone}}</p>
             </td>
-            <td style="width: 58.75pt;">
+            <td colspan="2">
                 <p><strong>эл. почта</strong></p>
             </td>
-            <td colspan="4" style="width: 141.8pt;">
+            <td colspan="2">
                 <p> {{email}}</p>
             </td>
         </tr>
         <tr>
-            <td style="width: 100pt;border: 1pt solid windowtext;">
+            <td colspan="2" style="border: 1pt solid windowtext;">
                 <p ><strong>зарегистрирован</strong></p>
             </td>
-            <td colspan="10" style="width: 465.5pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;height: 16.45pt;vertical-align: top;">
+            <td colspan="10" >
                 <p>{{passport_address_registration}}</span></p>
             </td>
         </tr>
@@ -209,10 +217,10 @@
 
 <p ><strong>являюсь&nbsp;собственником (нанимателем)&nbsp;внутриквартирного газового оборудования, в многоквартирном доме / внутридомового газового оборудования в жилом&nbsp;доме (домовладении)&nbsp;по&nbsp;адресу:</strong></p>
 
-<p style='text-align:center;font-size: 16px;'><strong><u>{{address}}</u></strong></br><span style="font-size:8pt">(адрес квартиры или домовладения)</span></p>
+<p style='text-align:center;font-size: 22pt;'><u>{{address}}</u></br><span style="font-size:8pt">(адрес квартиры или домовладения)</span></p>
 
-<p ><strong>руководствуясь статьями 426,&nbsp;427&nbsp;и&nbsp;428&nbsp;ГК&nbsp;РФ полностью и&nbsp;безусловно присоединяюсь к&nbsp;&nbsp;<u>Публичной оферте</u>
-АО&nbsp;&laquo;Газпром&nbsp;газораспределение&nbsp;Оренбург&raquo;&nbsp;&nbsp;на&nbsp;выполнение работ (оказание&nbsp;услуг) по техническому обслуживанию</strong></p>
+<p ><strong>руководствуясь статьями 426,&nbsp;427&nbsp;и&nbsp;428&nbsp;ГК&nbsp;РФ полностью и&nbsp;безусловно присоединяюсь к&nbsp;<u>Публичной оферте</u>
+АО&nbsp;&laquo;Газпром&nbsp;газораспределение&nbsp;Оренбург&raquo;на&nbsp;выполнение работ (оказание&nbsp;услуг) по техническому обслуживанию</strong></p>
 
 <table style="width:100%">
     <tbody>
@@ -221,8 +229,8 @@
                 <p style="text-align: center;font-size:13px;"><strong><em><u></br>ОТМЕТИТЬ НУЖНОЕ</br></br></u></em></strong></p>
             </td>
             <td>
-                <p >&nbsp; &nbsp; □&nbsp;-&nbsp;внутриквартирного газового оборудования в&nbsp;&nbsp;&nbsp;<u>многоквартирном доме</u>&nbsp;(далее &ndash; ТО&nbsp;ВКГО в МКД)&nbsp;</p>
-                <p>&nbsp; &nbsp; ▣&nbsp;-&nbsp;внутридомового&nbsp;газового оборудования в&nbsp;&nbsp;&nbsp;<u>жилом доме</u>&nbsp;(домовладении)&nbsp;(далее&nbsp;&ndash;&nbsp;ТО&nbsp;ВДГО в ИЖД)</p>
+                <p >&nbsp; &nbsp; □&nbsp;-&nbsp;внутриквартирного газового оборудования в&nbsp;<u>многоквартирном доме</u>&nbsp;(далее &ndash; ТО&nbsp;ВКГО в МКД)&nbsp;</p>
+                <p>&nbsp; &nbsp; ▣&nbsp;-&nbsp;внутридомового&nbsp;газового оборудования в&nbsp;<u>жилом доме</u>&nbsp;(домовладении)&nbsp;(далее&nbsp;&ndash;&nbsp;ТО&nbsp;ВДГО в ИЖД)</p>
 
             </td>
         </tr>
@@ -263,26 +271,8 @@
 </table>
 
 </br>
-<table width="100%" style="text-align:center;">
-    <tbody>
-        <tr>
-            <td><p>&laquo;_____&raquo; ___________________ &nbsp;20___г.</br><span style="font-size: 8pt">(дата)</span></p></td>
-            <td><p>_____________________________________</br><span style="font-size: 8pt">(подпись)</span></p></td>
-            <td><p>_____________________________________</br><span style="font-size: 8pt">(ресшифровка)</span></p></td></td>
-        </tr>
-
-    </tbody>
-</table>
-
-<hr />
-
-<p style="font-size:10pt"><strong>Согласие на обработку персональных данных</strong></p>
-
-<p style="font-size:8pt;text-align:justify;margin-bottom:0px;padding-bottom:0px;text-indent:1.5em;">В&nbsp;соответствии с Федеральным законом&nbsp;от&nbsp;27.07.2006&nbsp;г.&nbsp;№152-ФЗ&nbsp;&laquo;О&nbsp;персональных&nbsp;данных&raquo;&nbsp;свободно, своей волей и в&nbsp;своем интересе выражаю АО&nbsp;&laquo;Газпром&nbsp;газораспределение&nbsp;Оренбург&raquo;&nbsp;(ИНН&nbsp;5610010369)&nbsp;в&nbsp;целях заключения и&nbsp;исполнения договора&nbsp;о&nbsp;техническом обслуживании внутриквартирного газового оборудования в&nbsp;многоквартирном доме /&nbsp;внутридомового газового оборудования в&nbsp;жилом доме(домовладении), а&nbsp;также исполнения заявок о&nbsp;ремонте или замене газового оборудования, обеспечения соблюдения законов и&nbsp;иных нормативных правовых актов, свое согласие на&nbsp;обработку, предполагающую сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, обезличивание, использование, передачу (предоставление, доступ) блокирование, удаление и&nbsp;уничтожение моих персональных данных, включающих фамилию, имя, отчество, год, месяц, дату и&nbsp;место рождения, данные документа, удостоверяющего личность (паспортные данные), адрес проживания (регистрации), телефонный абонентский номер, адрес электронной почты, страховой номер индивидуального лицевого счета&nbsp;(СНИЛС), банковских реквизитов, имущественных прав&nbsp;на&nbsp;объект обслуживания и(или)&nbsp;помещения, в&nbsp;котором установлен объект обслуживания, в&nbsp;ООО &laquo;Газпром&nbsp;межрегионгаз&nbsp;Оренбург&raquo;, а&nbsp;также третьим лицам, привлекаемым к исполнению указанных действий.</p>
-<p style="font-size:8pt;text-align:justify;margin-top:0px;padding-top:0px;text-indent:1.5em;">Одновременно, я&nbsp;даю свое согласие, что&nbsp;все юридически значимые сообщения в&nbsp;рамках исполнения договора о&nbsp;ТО&nbsp;ВКГО&nbsp;в&nbsp;МКД/ВДГО&nbsp;в&nbsp;ИЖД, заключенного с&nbsp;АО&nbsp;&laquo;Газпром&nbsp;газораспределение Оренбург&raquo;, будут направлены мне любым доступным способом с&nbsp;помощью средств связи на&nbsp;номер сотового телефона или адрес электронной почты указанные выше.</p>
-
 </br>
-<table width="100%" style="text-align:center;">
+<table width="100%" style="text-align:center;font-size: 9pt;">
     <tbody>
         <tr>
             <td><p>&laquo;_____&raquo; ___________________ &nbsp;20___г.</br><span style="font-size: 8pt">(дата)</span></p></td>
@@ -293,36 +283,48 @@
     </tbody>
 </table>
 
-</br>
-</br>
 <hr style="border-top: #666 dashed 1px;" noshade size="1" color="#fff"/>
 </br>
 
-<hr size="2" color="black" noshade />
+<p style="font-size:10pt"><strong>Согласие на обработку персональных данных</strong></p>
 
-<table>
+<p style="font-size:8pt;text-align:justify;margin-bottom:0px;padding-bottom:0px;text-indent:1.5em;">В&nbsp;соответствии с Федеральным законом&nbsp;от&nbsp;27.07.2006&nbsp;г.&nbsp;№152-ФЗ&nbsp;&laquo;О&nbsp;персональных&nbsp;данных&raquo;&nbsp;свободно, своей волей и в&nbsp;своем интересе выражаю АО&nbsp;&laquo;Газпром&nbsp;газораспределение&nbsp;Оренбург&raquo;&nbsp;(ИНН&nbsp;5610010369)&nbsp;в&nbsp;целях заключения и&nbsp;исполнения договора&nbsp;о&nbsp;техническом обслуживании внутриквартирного газового оборудования в&nbsp;многоквартирном доме /&nbsp;внутридомового газового оборудования в&nbsp;жилом доме(домовладении), а&nbsp;также исполнения заявок о&nbsp;ремонте или замене газового оборудования, обеспечения соблюдения законов и&nbsp;иных нормативных правовых актов, свое согласие на&nbsp;обработку, предполагающую сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, обезличивание, использование, передачу (предоставление, доступ) блокирование, удаление и&nbsp;уничтожение моих персональных данных, включающих фамилию, имя, отчество, год, месяц, дату и&nbsp;место рождения, данные документа, удостоверяющего личность (паспортные данные), адрес проживания (регистрации), телефонный абонентский номер, адрес электронной почты, страховой номер индивидуального лицевого счета&nbsp;(СНИЛС), банковских реквизитов, имущественных прав&nbsp;на&nbsp;объект обслуживания и(или)&nbsp;помещения, в&nbsp;котором установлен объект обслуживания, в&nbsp;ООО &laquo;Газпром&nbsp;межрегионгаз&nbsp;Оренбург&raquo;, а&nbsp;также третьим лицам, привлекаемым к исполнению указанных действий.</p>
+<p style="font-size:8pt;text-align:justify;margin-top:0px;padding-top:0px;text-indent:1.5em;">Одновременно, я&nbsp;даю свое согласие, что&nbsp;все юридически значимые сообщения в&nbsp;рамках исполнения договора о&nbsp;ТО&nbsp;ВКГО&nbsp;в&nbsp;МКД/ВДГО&nbsp;в&nbsp;ИЖД, заключенного с&nbsp;АО&nbsp;&laquo;Газпром&nbsp;газораспределение Оренбург&raquo;, будут направлены мне любым доступным способом с&nbsp;помощью средств связи на&nbsp;номер сотового телефона или адрес электронной почты указанные выше.</p>
+
+</br>
+<table width="100%" style="text-align:center;font-size: 9pt;">
     <tbody>
         <tr>
-            <td style="text-align:center;width:50%;font-size:9pt;">
-                <p>
-                    <img align="left" vspace="5" hspace="5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFEAAABRCAAAAACP5BXqAAAABGdBTUEAALGOfPtRkwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAAnPSURBVFjD7Zh7UJNXFsAPyKvEWLUJEmwbfLTVqKB22tLo4Gq7xF0etW7USdnu0lpMrV2tM8ZHhaogVTLdto6Oota6KGItawXRLvhAu4qutq6gUnHCSFBRQ0QREsiGx9lz75cQAh8u0+6fnj/y3Xvu+X65332cc+4F/H8LPCY+Jv564v0SLznRgmUlNV0ta0l7qg3P8+YybDnh/cL9HsSj4C3VGA0ZXYlZpPRrwud4azRWd7M/2oNYAj6hCrfIwc+MMZCJzbV1QnND7XrwV4yzYwQMVEghBs1+IO+0D/WBEhFi6D27g0uL/TL4mvG3YMS84JeF5oXBARBlb0Yi7nJ8Cho0+8Jle4vwgv1eqCgxzNn5hdWMGEPEPaASNMn0YZNYIQK+xc8FYnWnvTNMlKhwYLyKyQKsYsSaihWqoRDEVapBRFQzu0gYqgoRiFW4gLfFo0PRGzGcD3KMQERM8R78CcxuJC9OEogxvBL+CKKKWyQIxHTt87z6xI48QbZoSbbz4imBmMANVH0ljnF17Um3yXlWq3RVfgkxO/VVGJM6DwKXpaWlXSCTmlSSO/hd2rG+E4dyi2nucTRAIt4XOrrRs9TfhA/cxGm8bWivxBZckMBkrZu4M2Fxwc6E2ACYnJBZUE4Kx+GCgoJoMLiJa7n9AmwRJ4Z5unFLICLmwUhEOZTje/AntnOEDi8RiLc8L4ivR/llU5UgpmOMWGt6gLkQgXYZlKIe9Nhi+nHciAAYMnK5qZYRj3XaX5aLEI97rz2favyd719xL4xB20A4i/OJWAqDm2nP7EUjLdlqH+8XjvcgnvD39/WIf3ANvg4Zzhz/iWhT+P/TmcyIvvKm9gjY0270nY41wV72/id6EFvMXlLThhoYpJxrvo0dN8yxSikRHeay0Up/kCmXmy3YWuP9QksffPhU+pZEofgSFfX0bPfnX/hxn3x4mUbnxGSNRpONZzVcthbNAoVmPmtUc2KFZqofbCn6DYRrPkbLdE0ttWRr0rGGWZf1IB6B/sg9xSq3Oz+Hn9Lv86yR7aW5eIlpG3Ae/U5lC8lKLUvIaVxk+iMiq0ey2PAUNb1qeBNkmUajcaWBfazckNKEe6iaZniLvZlkGM3cjWGeD7xnMBhWGwvwnjFjgMjqKe66FBTuweNymxvsBTFJE97uD8U9iBWJXSR5d05OzqJE9rGDEuc+pOZzOe+CnDUNhEkeu6eJWEOm2e8mVjx6rh+yvz+D6fQ7UdC8wwMgyQQ46LF7A1Iwm9l2iMx1U3lFB1aWC3JkfERExO7yJLKNxPYrZWVlWndUiIBcrHOZlSdFbsUjZPrSyfImkV0Y0oGjXKPzDNO85nJ+NqlL+4ow7d9gpnsUC1wvOwaJxOvjILc2CmHARzK2yWazxUn6S6VSNdrCJRJenNpI8rJ0V+N6iUu+R2djk60FHSMkP4hlADKZLydqrBdCZDLZAavVWmepx456XrBYikkpO2VJCllu5WKxOHCdTB4yGbHe6uxBPOZZEfF4lz1OdJ+vs0x7BefACo9uCameE9+FDaVcpkJS6TZ1/GkqvqNWq1dRiz2WCvlUaGQGdtTBUDWTyTdZ7CldC8GsdqG31aODtZgPwW5P8XtuQ7LZY5Lk/pafefWwUOm5Cyv1S/9DDy2kojlrw7z375E3m5m1Tq/Xz9+UlZW1Up/DermI6iwHUJFqa4MrcHAR24WBNnrEExHxDoAJo+Az/DszZoP+Z5hDv7fd3Zvp6XKOoCkWi4XNuC9rmX5VVhHW6amPG/TFFGcApHWYT31cmZUv9FGvj+J9JGHh7YJ+NvT7o75SzJs5UAr7caWQgwlygBGtqKRx3AxKt/Zzd1cP8+ptCGoRmesL6gQnJqpLcKc6WZj2B1hdulog6mmu89XMi+PFUivu4XOtDoJMMqvECgisfXRmf9idBy/iz4AHXRvD4W/uopBAz0CTONHJ9oDV6qDiQbZ9fOAby1KZFPxChl211Fk7P2uKbD8204apZ4nfANkTEGc5JU78QSKhrSs9QMUCGG5rehaCJOsbv4axNuswqUTyldvO3ujEL2hLj2rHYbC30QD9pMHiRFdw2ceJI4WQk4nfwnhsH0zFTV2/PIMUIe00X4fwE2FgakX949EgasvjxICICH/YXF5HqycocpwfZJfd40b1UZHX6MH8I22Yq+UP8U7ZZzC87JJTfGYkLmKJOxayIeVy0e0HAf7dfR4LYay4p6jQzejHid/pomFITm5u7iKdTqcWiKXMOVF1ph+laRt1TP7SgR/pfuK7UCVOdMXCg7iCfkOZ5nWPf2Ph/UuheAO1/DkIMYS7h+LeiBSvP6L4m25cTb/LKT4bX+BvyqlqyDCW8VMcyWLjeIGYaXwKksjs7d6IPKdAyoNZunnX070XhUPMVtwFvcm4XvMetrrTKe+hc+p0ymRk3DxSyHsWFi2EgSy/EcKYTEiNQnjl2SKS+j7kZrGeY5EwQVGsOJEXYwWTmZ6OFvUxf5TBaHNNOxEHK5XKWPNNNgA8uGFbjbmNnz6ClWF0XFCe6UOOq4F1zt0Avk9a8RXY6GxtP+0rt+FYF9Hs5yucZ2Y6yyHQ7OzoQx6uIR++j4oSK0723U4mZ2CwDSfQ//kwIrhOSLPwGgRaRFdP97OChk7DuTCq6nob3jQ9xL0j4k3XO/CGyWRaRsTWqqpWTtSSfwy4LUrsfp6ZDOlEfNGt2wKj3cUv3TPzByK+wS4YHooS6cz1QRyTdOHM9a/CKiIOiJvFYt6muKWFp7FBG3edKkaQc8O4IZBYuCHu7cL82XHl4ufCp73PhSjEwjvI7gA+FGIki/SrPeO9GYtgIAvph/p0dk1NXZW2APrX4bbUiTAxdRvWSfgWP5PGZA3zm1NSP0lLS01dk1bdB2IUXyU0SHWuvoejk01wp7zgWkgPAMQ9RXeiBsZpv0CzNrERV2qHw3Dt+3l75mi3593Aa3l5ed93dIwEtVarXZy3Qzt7V16dONHrnmJK11DwIZ1nfmJ9CYOvMI0FgnYcwQ+Dh2EIoi/8Q5zodZeSrFpXcQsdFVwWqVbjRZW6GWeoDtFcS1SvMWIB1lXsUMVUlKtV58TWY7f7HpYczsErwpxu7+pDjDR4JEooxBSK1z/3tsK730k5HUsD37KfDwzgtwqOVmx3UPbmdLQTcTpic5MqeL89JVCHV8Hvjiix+72ZTrGu9mtFdK2JncQGKJbij4oxdpymOECZfQzeDAs9VztHsab2PtuFj4jXXe72oiCDUjkltvbnikQ8CT5N+AzspHgdjdcBzOTxU+jVy9D1guF/3D/eLTmPbae4phIbhPvHu1jD7h9LSprxUglb2LaSk45HZ1K/Th4THxN/ufwXuXyL97cFxWIAAAAASUVORK5CYII="/>
-                    </br></br>РАСПИСКА</br>В ПОЛУЧЕНИИ ДОКУМЕНТОВ</br>по Л/СЧ:____________________</br></br>
-                </p>
-                <p>Заявление о присоединении к условиям публичной оферты АО «Газпром газораспределение Оренбург» на оказание услуг по ТО ВКГО/ВДГО ПОЛУЧЕНО.</p>
+            <td><p>&laquo;_____&raquo; ___________________ &nbsp;20___г.</br><span style="font-size: 8pt">(дата)</span></p></td>
+            <td><p>_____________________________________</br><span style="font-size: 8pt">(подпись)</span></p></td>
+            <td><p>_____________________________________</br><span style="font-size: 8pt">(расшифровка)</span></p></td></td>
+        </tr>
 
-            </td>
-            <td style="text-align:center;width:50%;font-size:8pt;">
-            </br></br></br></br>
-                __________________________________________________</br>
-                <span style="font-size:8pt;"></span>(Ф.И.О.)</span></br></br>
-                _________________________________________________________</br>
-                <span style="font-size:8pt;">(должность лица, при непосредственном участии (присутствии) которого принято заявление)</span></br></br>
-                ______________________________</br>
-                <span style="font-size:8pt;">(подпись)</span></br></br>
-                М.П.
+    </tbody>
+</table>
+
+
+
+<!-- <hr size="2" color="black" noshade /> -->
+<p style="text-align:center;width:100%;font-size:14pt;">
+Распечатай, подпиши, сфотографируй и отправь по адресу <u>orenburgregiongaz.ru/vdgo</u>
+<img valign="middle" width="50" height="50" vspace="5" hspace="5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnsAAAJ7AQMAAACh+sXUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURQAAAP///6XZn90AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQfSURBVHja7ZzBcuIwDIbVyaG3AjcOTP0oPNryaDyKZ/bQ2y576yGDtnVsLCfplrIqFdWvC25jf/hLaDVyHGgmfvBLPOcf7mqzYz6kBufYT8cGbSBpAzttoH3lpTbQvvJaG2hf+UEbaF9ZHWhfeaMNtK+80AaGoZ+ImIFD7F473admAW7r0X1ls5iEKrDTBtpXXvlTXvtTXvpTvvenvPGnHG5F+UCnZpym0eFtmPuXtJvZlJr7/NvS8TOAwfwMH/0pkz/llT/ltT/l4E954U95Mw88ptwZG6BIox9XvhxI2sClP+V7f8qP/pTX/pTJn/KdP+Xu2sqpSfUo13XSy5Q/DHzQBtpXJn/KS3/Ka3/KwZ/ywp9ydyvKItriUTRL8bgfNUXUq6wHDNpAMg8M/s4hlA0CO3/KK3ywbSpPYpz1huY8cBwrbaD6DEkbuPanvPCnTP6UO3/KDj+HnT/lVZsHRynx9XWo9UJzLP1qMTssmgc++VP+7U/52Z8ymwfa/2AzrvJ/A2/hKjcHJ6uVzS0+cV9PFJx97jhE1AY+aQPtK0fzyuzvKgMIIP6WzwH+uQHl0tjnISlE8Xi6eOl1Aky0UB9xiP6AR5xDB0CGMpS/I/CX23Mo+pV10lG/HMO2l5I7xaN7pwAQQAABnANGKEPZhHJJiSKN7uTjCqJJ4z0xZUybb3WBbB7oUBlAAC8A/vSnfPCn/ET2/2OXrS5clk8z5cxNoaKOzJtCrQPJPDD4myGUoQxlAK8KpDqkWTUn8bxeGnKguZD7aAAEEMAzgARlKEP5q5S5LJkKdgmRRkuUjjOpl0eLuhpANg+EMpShDGUof5py00+E2MNZol0KFQkw5FXRVOspA8n8DKEMZShDGcDbATYpUdyjE8DylDrXfNuGuAHIAAII4FcAo78ZQhnKFynP7GaZj/QG44pxiLIqmsM2MEAZQAABBNAzcIjtzPLna7xbPLap1z5wA2UoQxnKV5khQdmmcjeuCcVDers3nlxot3OGOjZqA3ttIEMZylCGMpShTHlRNDbrpCKjNu/c7qMRxeNGGxi0geRPGUAAAQQQwBI8F8f6hSzHMqQUj5yBi9qkXDzycOcRQAABBPAGgQygC+BMiG8kS1HWartmkCgeU9wBCCCAZwN7bWCEMpShfKayyI48Lh4bdt9sjxFpNB0dxvTawKgNhDKUoQxlKHtXfmOri1habXLnTJzeWRtI2sANlKEMZShfZYYByp+oPAkxuhR427zuWW4APv9L+UJg0AZCGcrfUjlAGcpQVlAW2zlLx7LZ80CTqMWjYWD0p4xzCGUoQxnKdNaS6XgPJzdsMYmSRjttIJkHQhnKUIbyLDCYV974VJ5EAXJ9Xo9r8bitbPF9Lrt3N/BcCIzawB7KUDagbP8cQhnK31GZ+S+z+59s+K0HdwAAAABJRU5ErkJggg==">
+</p>
+<!-- <table style="text-align:center;width:100%;font-size:14pt;">
+    <tbody>
+        <tr>
+            <td style="text-align:center;">
+                <p>
+                    Распечатай, подпиши, сфотографируй и отправь по адресу <u>orenburgregiongaz.ru/vdgo</u><br>
+                </p>
+                </td>
+                <td>
+                    <img width="50" height="50" vspace="5" hspace="5" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnsAAAJ7AQMAAACh+sXUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURQAAAP///6XZn90AAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQfSURBVHja7ZzBcuIwDIbVyaG3AjcOTP0oPNryaDyKZ/bQ2y576yGDtnVsLCfplrIqFdWvC25jf/hLaDVyHGgmfvBLPOcf7mqzYz6kBufYT8cGbSBpAzttoH3lpTbQvvJaG2hf+UEbaF9ZHWhfeaMNtK+80AaGoZ+ImIFD7F473admAW7r0X1ls5iEKrDTBtpXXvlTXvtTXvpTvvenvPGnHG5F+UCnZpym0eFtmPuXtJvZlJr7/NvS8TOAwfwMH/0pkz/llT/ltT/l4E954U95Mw88ptwZG6BIox9XvhxI2sClP+V7f8qP/pTX/pTJn/KdP+Xu2sqpSfUo13XSy5Q/DHzQBtpXJn/KS3/Ka3/KwZ/ywp9ydyvKItriUTRL8bgfNUXUq6wHDNpAMg8M/s4hlA0CO3/KK3ywbSpPYpz1huY8cBwrbaD6DEkbuPanvPCnTP6UO3/KDj+HnT/lVZsHRynx9XWo9UJzLP1qMTssmgc++VP+7U/52Z8ymwfa/2AzrvJ/A2/hKjcHJ6uVzS0+cV9PFJx97jhE1AY+aQPtK0fzyuzvKgMIIP6WzwH+uQHl0tjnISlE8Xi6eOl1Aky0UB9xiP6AR5xDB0CGMpS/I/CX23Mo+pV10lG/HMO2l5I7xaN7pwAQQAABnANGKEPZhHJJiSKN7uTjCqJJ4z0xZUybb3WBbB7oUBlAAC8A/vSnfPCn/ET2/2OXrS5clk8z5cxNoaKOzJtCrQPJPDD4myGUoQxlAK8KpDqkWTUn8bxeGnKguZD7aAAEEMAzgARlKEP5q5S5LJkKdgmRRkuUjjOpl0eLuhpANg+EMpShDGUof5py00+E2MNZol0KFQkw5FXRVOspA8n8DKEMZShDGcDbATYpUdyjE8DylDrXfNuGuAHIAAII4FcAo78ZQhnKFynP7GaZj/QG44pxiLIqmsM2MEAZQAABBNAzcIjtzPLna7xbPLap1z5wA2UoQxnKV5khQdmmcjeuCcVDers3nlxot3OGOjZqA3ttIEMZylCGMpShTHlRNDbrpCKjNu/c7qMRxeNGGxi0geRPGUAAAQQQwBI8F8f6hSzHMqQUj5yBi9qkXDzycOcRQAABBPAGgQygC+BMiG8kS1HWartmkCgeU9wBCCCAZwN7bWCEMpShfKayyI48Lh4bdt9sjxFpNB0dxvTawKgNhDKUoQxlKHtXfmOri1habXLnTJzeWRtI2sANlKEMZShfZYYByp+oPAkxuhR427zuWW4APv9L+UJg0AZCGcrfUjlAGcpQVlAW2zlLx7LZ80CTqMWjYWD0p4xzCGUoQxnKdNaS6XgPJzdsMYmSRjttIJkHQhnKUIbyLDCYV974VJ5EAXJ9Xo9r8bitbPF9Lrt3N/BcCIzawB7KUDagbP8cQhnK31GZ+S+z+59s+K0HdwAAAABJRU5ErkJggg==">
+
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->
+
 </body>
 </html>

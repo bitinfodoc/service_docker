@@ -34,12 +34,22 @@ class ContractsVdgoUpload(viewsets.ViewSet):
         if pk == 'pdf':
             contract = ContractVdgo.objects.filter(account_number = '14135100').first()
             contract_pdf = pdf_contract(contract)
-            if contract_pdf != "error":
-                contract.contract_pdf = contract_pdf['pdf_path']
-                contract.save()
+            if contract_pdf["error"] == False:
+                print('no errors')
+
+                print(contract.contract_pdf)
+                if contract.contract_pdf:
+                    print(contract.contract_pdf.path)
+                    if os.path.exists(contract.contract_pdf.path):
+                        print(contract.contract_pdf.path)
+                        os.remove(contract.contract_pdf.path)
+
+                contract.contract_pdf.save(contract_pdf['pdf_name'], File(open(contract_pdf['pdf_path'], 'rb')))
+                os.remove(contract_pdf['pdf_path'])
                 return Response({'message': "Sended"}, status=200)
             else:
                 return Response({'message': "Error create file"}, status=400)
+
 
     def create(self, request):
         print('add fileviews')
@@ -80,11 +90,14 @@ class ContractsVdgoView(viewsets.ViewSet):
             self.update_contracts_vdgo(request, contract)
 
             if request.data.get('consent'):
-                contract_pdf_path = pdf_contract(contract)
-                print(contract_pdf_path)
-                if contract_pdf_path['pdf_path']:
-                    contract.contract_pdf = contract_pdf_path['pdf_path']
-                    contract.save()
+                contract_pdf = pdf_contract(contract)
+                if contract_pdf["error"] == False:
+                    print('no errors')
+
+                    contract.contract_pdf.save(contract_pdf['pdf_name'], File(open(contract_pdf['pdf_path'], 'rb')))
+                    # print("contract_pdf['pdf_path']")
+                    # print(contract_pdf['pdf_path'])
+                    # # os.remove(contract_pdf['pdf_path'])
                 else:
                     return HttpResponse(json.dumps({'message': "Cant create contract pdf file"}), status=401)
         else:
@@ -92,22 +105,32 @@ class ContractsVdgoView(viewsets.ViewSet):
 
         return HttpResponse(json.dumps({"result": True, 'message': "Uploaded"}), status=200)
 
+
     def retrieve(self, request, pk=None):
 
         if len(pk) == 8: queryset = ContractVdgo.objects.filter(account_number = pk)
         elif len(pk) == 12: queryset = ContractVdgo.objects.filter(account_number_rng = pk)
-        else: return Response(response, status=201)
+        else: queryset = ""
+
 
         if len(queryset) == 0:
-            response = False
-            return Response(response, status=204)
+            response = {
+                    "not_found": True,
+            }
         else:
             contract = queryset.first()
+
             if contract.consent == True:
-                response = True
-                return Response(response, status=208)
+                response = {
+                    "is_consent": True,
+                    "is_signed": contract.is_signed,
+            }
             else:
-                return Response(contract.account_address, status=200)
+                response = {
+                    "address": contract.account_address
+            }
+
+        return HttpResponse(json.dumps(response), status=208)
 
 
     def update(self, request, pk=None):
@@ -228,7 +251,6 @@ class ContractsVdgoView(viewsets.ViewSet):
             contract.certificate_last = request.FILES.get('certificate_last')
             contract.certificate_last.name = "certificate_last_" + account_number + self.extension_file(request.FILES.get('certificate_last'))
 
-
         # номер телефона
         if request.data.get('phone'):
             contract.phone = request.data.get('phone')
@@ -250,6 +272,13 @@ class ContractsVdgoView(viewsets.ViewSet):
         # прислать смс
         if request.data.get('sms'):
             contract.sms = request.data.get('sms')
+
+
+        if request.FILES.get('contract_pdf_signed'):
+            contract.contract_pdf_signed.delete(save=False)
+            contract.contract_pdf_signed = request.FILES.get('contract_pdf_signed')
+            contract.contract_pdf_signed.name = "signed_" + account_number + self.extension_file(request.FILES.get('contract_pdf_signed'))
+            contract.is_signed = True
 
         contract.last_update_date = datetime.now()
 

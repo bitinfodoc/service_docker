@@ -41,8 +41,8 @@ class ContractVdgo(models.Model):
     inn_first = models.ImageField(upload_to = upload_to, blank=True, default='', verbose_name='Лицевая сторона ИНН',)
 
 
-    certificate_first = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат первый',)
-    certificate_second = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат второй',)
+    certificate_first = models.FileField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат первый',)
+    certificate_second = models.FileField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат второй',)
     certificate_therd = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат третий',)
     certificate_fourth = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат четвёртый',)
     certificate_fifth = models.ImageField(upload_to = upload_to, default = '', blank=True, verbose_name='ЕГРН сертификат пятый',)
@@ -54,6 +54,7 @@ class ContractVdgo(models.Model):
     consent = models.BooleanField(default=False, verbose_name='Подтверждение корректности данных')
 
     sms = models.BooleanField(default=False, verbose_name='СМС')
+    is_signed = models.BooleanField(default=False, verbose_name='Получена подпись')
     is_sended = models.BooleanField(default=False, verbose_name='Отправлено в реестр')
 
 
