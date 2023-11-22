@@ -2,6 +2,7 @@ from main.celery import app
 from contracts.models import ContractVdgo
 import os
 from django.conf import settings
+from datetime import datetime
 
 @app.task
 def create_contract_record(file_lines_array):
@@ -30,14 +31,25 @@ def create_contract_record(file_lines_array):
             print(line_result[0])
             print(line_result[1])
             print(line_result[2])
+            print(line_result[3])
 
             if len(records) == 0:
                 ContractVdgo(
                     account_number = str(line_result[0]),
                     account_number_rng = str(line_result[1]),
-                    account_address = str(line_result[2])
+                    account_address = str(line_result[2]),
+                    is_izs = str(line_result[3]),
+                    last_update_date = datetime.now()
                 ).save()
             else:
+                records.update(
+                    account_number = str(line_result[0]),
+                    account_number_rng = str(line_result[1]),
+                    account_address = str(line_result[2]),
+                    is_izs = str(line_result[3]),
+                    last_update_date = datetime.now()
+                )
+
                 print('already exist')
         except:
             # file.close

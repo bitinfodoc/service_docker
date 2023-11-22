@@ -22,8 +22,8 @@ class ContractVdgoAdmin(admin.ModelAdmin):
             None,
             {
                 "fields": [
-                        ("id", "created_date", "last_update_date", "is_sended","is_signed") ,
-                        ("account_number", "account_number_rng", "account_address"),
+                        ("id", "created_date", "last_update_date", "is_sended", "is_signed", ) ,
+                        ("account_number", "account_number_rng", "is_izs", "account_address"),
                         ("contract_pdf", "contract_pdf_signed")
                     ],
             },
@@ -75,7 +75,7 @@ class ContractVdgoAdmin(admin.ModelAdmin):
         models.CharField: {"widget": Textarea},
     }
     readonly_fields = ('id', 'created_date', 'account_number', 'account_number_rng', 'last_update_date', "account_address")
-    list_display = [ 'account_number', 'account_number_rng', 'last_update_date', 'consent', 'is_sended' ]
+    list_display = [ 'account_number', 'account_number_rng', 'last_update_date', 'consent', 'is_sended', 'is_izs', ]
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
