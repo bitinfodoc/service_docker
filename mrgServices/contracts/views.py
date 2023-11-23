@@ -123,6 +123,7 @@ class ContractsVdgoView(viewsets.ViewSet):
             response = {
                 "is_consent": contract.consent,
                 "is_signed": contract.is_signed,
+                "is_izs": contract.is_izs,
                 "ls": contract.account_number,
                 "rng": contract.account_number_rng,
                 "address": contract.account_address
