@@ -27,6 +27,7 @@ def pdf_contract(contract):
             "passport_address_registration": contract.passport_address_registration,
 
             "snils_number": contract.snils_number,
+            "is_izs": contract.is_izs,
 
             "phone": contract.phone,
             "email": contract.email,
@@ -38,11 +39,12 @@ def pdf_contract(contract):
 
         print('template data created')
         env = Environment(loader=FileSystemLoader('.'))
+        print('ENV inicialized')
         template = env.get_template("templates/template.html")
-
+        print('template uploaded in ram')
         pdf_template = template.render(template_data)
 
-
+        print('templae file loaded')
         options = {
             'page-size': 'A4',
             'margin-top': '0.25in',

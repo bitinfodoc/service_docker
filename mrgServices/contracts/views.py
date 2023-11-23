@@ -31,24 +31,24 @@ class ContractsVdgoUpload(viewsets.ViewSet):
             copy_to_network.delay()
             return Response({'message': "Sended"}, status=200)
 
-        if pk == 'pdf':
-            contract = ContractVdgo.objects.filter(account_number = '14135100').first()
-            contract_pdf = pdf_contract(contract)
-            if contract_pdf["error"] == False:
-                print('no errors')
+        # if pk == 'pdf':
+        #     contract = ContractVdgo.objects.filter(account_number = '14135100').first()
+        #     contract_pdf = pdf_contract(contract)
+        #     if contract_pdf["error"] == False:
+        #         print('no errors')
 
-                # print(contract.contract_pdf)
-                # if contract.contract_pdf:
-                #     print(contract.contract_pdf.path)
-                #     if os.path.exists(contract.contract_pdf.path):
-                #         print(contract.contract_pdf.path)
-                #         os.remove(contract.contract_pdf.path)
+        #         # print(contract.contract_pdf)
+        #         # if contract.contract_pdf:
+        #         #     print(contract.contract_pdf.path)
+        #         #     if os.path.exists(contract.contract_pdf.path):
+        #         #         print(contract.contract_pdf.path)
+        #         #         os.remove(contract.contract_pdf.path)
 
-                contract.contract_pdf.save(contract_pdf['pdf_name'], File(open(contract_pdf['pdf_path'], 'rb')))
-                os.remove(contract_pdf['pdf_path'])
-                return Response({'message': "Sended"}, status=200)
-            else:
-                return Response({'message': "Error create file"}, status=400)
+        #         contract.contract_pdf.save(contract_pdf['pdf_name'], File(open(contract_pdf['pdf_path'], 'rb')))
+        #         os.remove(contract_pdf['pdf_path'])
+        #         return Response({'message': "Sended"}, status=200)
+        #     else:
+        #         return Response({'message': "Error create file"}, status=400)
 
 
     def create(self, request):
@@ -120,15 +120,14 @@ class ContractsVdgoView(viewsets.ViewSet):
         else:
             contract = queryset.first()
 
-            if contract.consent == True:
-                response = {
-                    "is_consent": True,
-                    "is_signed": contract.is_signed,
+            response = {
+                "is_consent": contract.consent,
+                "is_signed": contract.is_signed,
+                "ls": contract.account_number,
+                "rng": contract.account_number_rng,
+                "address": contract.account_address
             }
-            else:
-                response = {
-                    "address": contract.account_address
-            }
+
 
         return HttpResponse(json.dumps(response), status=208)
 
