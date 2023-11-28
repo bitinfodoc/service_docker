@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.forms import TextInput, Textarea
 from django.db import models
+from django.conf import settings
 
 # Register your models here.
 from contracts.models import ContractVdgo
@@ -9,22 +10,16 @@ from contracts.models import ContractVdgo
 
 @admin.register(ContractVdgo)
 class ContractVdgoAdmin(admin.ModelAdmin):
-    # fields = (
-    #             ('id', 'created_date'),
-    #             ('account_number', 'account_number_rng', ),
-    #             'passport_name',
-    #             ('passport_place', 'passport_birth_date', 'passport_serial', 'passport_number', 'passport_issued_date', 'passport_issued','passport_issued_code',),
-    #             ('passport_address_registration', ),
 
-    #         )
     fieldsets = [
         (
             None,
             {
                 "fields": [
-                        ("id", "created_date", "last_update_date", "is_sended", "is_signed", ) ,
                         ("account_number", "account_number_rng", "is_izs", "account_address"),
-                        ("contract_pdf", "contract_pdf_signed")
+                        ("id", "created_date", "last_update_date", "is_sended", "is_signed", "is_error"),
+                        ("error_text"),
+                        ("contract_pdf", "contract_pdf_signed"),
                     ],
             },
         ),
@@ -74,7 +69,47 @@ class ContractVdgoAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {"widget": Textarea},
     }
-    readonly_fields = ('id', 'created_date', 'account_number', 'account_number_rng', 'last_update_date', "account_address")
+    list_filter = ('consent', 'is_signed', 'is_sended', 'is_izs', )
+    if settings == True:
+        readonly_fields = (
+            'id',
+            'created_date',
+            'account_number',
+            'account_number_rng',
+            'last_update_date',
+            'account_address',
+            'is_izs',
+            'contract_pdf',
+            'contract_pdf_signed',
+            'passport_name',
+            'passport_place',
+            'passport_birth_date',
+            'passport_serial',
+            'passport_number',
+            'passport_issued_date',
+            'passport_issued',
+            'passport_issued_code',
+            'passport_address_registration',
+            'passport_scan_first',
+            'passport_scan_second',
+            'snils_number',
+            'certificate_first',
+            'certificate_second',
+            'certificate_therd',
+            'certificate_fourth',
+            'certificate_fifth',
+            'certificate_last',
+            'phone',
+            'email',
+            'confirm',
+            'consent',
+            'sms',
+            'is_signed',
+            'is_sended',
+            )
+    else:
+        readonly_fields = ('id', 'created_date', 'account_number', 'account_number_rng', 'last_update_date', "account_address")
+
     list_display = [ 'account_number', 'account_number_rng', 'last_update_date', 'consent', 'is_sended', 'is_izs', ]
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},

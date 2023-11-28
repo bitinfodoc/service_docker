@@ -8,9 +8,11 @@ mrgServices/media/
 mrgServices/reesters/
 mrgServices/db.sqlite3
 reestrs/
+test_code/
 reesters/
 files/
 vdgo/
+mrgServices/static/
 mrgServices/static/
 
 mrgServices/main/settings.py
