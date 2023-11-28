@@ -4,7 +4,7 @@ from contracts.utils import csv_contract, move_files
 
 @app.task
 def copy_to_network():
-    unsended_contracts = ContractVdgo.objects.filter(consent = True, is_sended = False)
+    unsended_contracts = ContractVdgo.objects.filter(consent = True, is_signed = True, is_sended = False)
 
     print(unsended_contracts)
 
