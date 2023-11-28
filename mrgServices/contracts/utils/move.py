@@ -26,8 +26,8 @@ def move_files(account_number):
     for file in filelist:
         files_array.append(file.filename)
         print(file.filename)
-    remote_folder = 'vdgo/сайт_'+ account_number + '/'
-    if str('сайт_'+account_number) not in files_array: conn.createDirectory('Reestrs', remote_folder)
+    remote_folder = 'vdgo/Сайт_'+ account_number + '/'
+    if str('Сайт_'+account_number) not in files_array: conn.createDirectory('Reestrs', remote_folder)
 
     surce_folder = os.path.join(settings.MEDIA_ROOT,'vdgo', account_number)
     surce_files = os.listdir(surce_folder)
