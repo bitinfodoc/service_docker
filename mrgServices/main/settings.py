@@ -183,3 +183,9 @@ CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 CELERY_BEAT_SCHEDULER='django_celery_beat.schedulers:DatabaseScheduler'
 
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", 'http://127.0.0.1').split(" ")
+
+SMB_USER = os.environ.get("SMB_USER")
+SMB_PASS = os.environ.get("SMB_PASS")
+SMB_GROUP = os.environ.get("SMB_GROUP")
+SMB_REMOTE_NAME = os.environ.get("SMB_REMOTE_NAME")
+SMB_DOMAIN =  os.environ.get("SMB_DOMAIN")
