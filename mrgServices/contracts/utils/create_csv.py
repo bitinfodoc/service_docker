@@ -56,7 +56,7 @@ def csv_contract(item):
                 item.passport_number,
                 format_date(item.passport_issued_date),
                 item.passport_issued,
-                remove_symbols(item.passport_issued_code),
+                item.passport_issued_code,
                 remove_symbols(item.snils_number),
                 format_date(item.passport_birth_date),
                 item.passport_place,
