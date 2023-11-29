@@ -25,7 +25,7 @@ class ContractVdgo(models.Model):
     passport_name = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='ФИО владельца договора')
     passport_place = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Место рождения')
     passport_birth_date = models.CharField(default='', blank=True, null=True, unique=False,  max_length=30, verbose_name='Дата рождения')
-    passport_serial = models.CharField(default='', blank=True, null=True, unique=False,  max_length=4, verbose_name='Серия паспорта')
+    passport_serial = models.CharField(default='', blank=True, null=True, unique=False,  max_length=5, verbose_name='Серия паспорта')
     passport_number = models.CharField(default='', blank=True, null=True, unique=False,  max_length=6, verbose_name='Номер паспорта')
     passport_issued_date = models.CharField(default='', blank=True, null=True, unique=False,  max_length=30, verbose_name='Дата выдачи')
     passport_issued = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Кем выдан')
