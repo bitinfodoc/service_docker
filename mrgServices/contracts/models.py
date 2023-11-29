@@ -12,7 +12,7 @@ class ContractVdgo(models.Model):
 
     id = models.AutoField(primary_key=True)
     created_date = models.DateTimeField(default=timezone.now)
-    last_update_date = models.DateField(default=timezone.now)
+    last_update_date = models.DateTimeField(default=timezone.now)
 
     account_number = models.CharField(default='', null=True, blank=True, unique=False,  max_length=8, verbose_name='Лицевой счёт (8)')
     account_number_rng = models.CharField(default='', blank=True, null=True, unique=False,  max_length=12, verbose_name='Лицевой счёт (12)')
