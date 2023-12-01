@@ -25,25 +25,43 @@ class ContractsVdgoUpdate(viewsets.ViewSet):
 
     def create(self, request):
         print('add fileviews')
-        try:
-            ls = request.data.get("account_number")
-            is_finish = request.data.get("is_finish")
-            print(ls)
-            print(is_finish)
-            contract = ContractVdgo.objects.filter(account_number = ls).first()
+        serializer = ContractResetSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
 
-            if is_finish == True:
-                contract.is_finish = True
-            elif is_finish == False:
-                contract.is_sended = False
-                contract.is_signed = False
-                contract.consent = False
+                if request.data.get("token") == "4c53ff6e-d732-4ec9-a94b-19438a0083da":
+                    ls = request.data.get("account_number")
+                    is_finish = request.data.get("is_finish")
+                    is_reset = request.data.get("is_reset")
 
-            contract.save()
+                    contract = ContractVdgo.objects.filter(account_number = ls).first()
+                    print(is_finish)
+                    print(is_reset)
 
-            return HttpResponse(json.dumps({'message': "Updated", "status": True}), status=200)
+                    if (is_finish == None or is_finish == False) and (is_reset == None or is_reset == False):
+                        return HttpResponse(json.dumps({'message': "Введены некорректные данные. Поля finish и reset имеют равные значения или не заданы явно.", "status": False}, ensure_ascii=False), status=401)
 
-        except:
-            return HttpResponse(json.dumps({'message': "Some error", "status": False}), status=400)
+                    elif is_reset == True:
+                        print("is uncorrect")
+                        contract.is_sended = False
+                        contract.is_signed = False
+                        contract.error_text = "Переданны некорректные данные от абонента"
+                        contract.consent = False
+                        contract.save()
+
+                    elif is_finish == True:
+                        print("is correct")
+                        contract.is_finish = True
+                        contract.save()
+
+                    else:
+                        return HttpResponse(json.dumps({'message': "Введены некорректные данные. Поля finish и reset не заданы явно.", "status": False}, ensure_ascii=False), status=401)
+
+                    return HttpResponse(json.dumps({'message': "Успешно", "status": True}, ensure_ascii=False), status=200)
+
+            except:
+                return HttpResponse(json.dumps({'message': "Изменить статусы заявки не удалось", "status": False}, ensure_ascii=False), status=400)
+        return HttpResponse(json.dumps({'message': "Изменить статусы заявки не удалось. Получен неверный объект", "status": False}, ensure_ascii=False), status=400)
+
 
 

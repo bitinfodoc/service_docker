@@ -41,6 +41,8 @@ class FileUploadSerializer(serializers.Serializer):
 
 class ContractResetSerializer(serializers.Serializer):
     account_number = serializers.CharField()
+    token = serializers.CharField()
     is_finish = serializers.BooleanField()
+    is_reset = serializers.BooleanField()
 
 
