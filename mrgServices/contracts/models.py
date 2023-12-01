@@ -60,6 +60,7 @@ class ContractVdgo(models.Model):
 
     is_sended = models.BooleanField(default=False, verbose_name='Отправлено в реестр')
     is_error = models.BooleanField(default=False, verbose_name='Ошибка')
+    is_finish = models.BooleanField(default=False, verbose_name='Обработка завершена')
     error_text = models.CharField(default='', blank=True, null=True, unique=False,  max_length=1024, verbose_name='Текст ошибки')
 
 

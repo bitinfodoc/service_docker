@@ -39,3 +39,8 @@ class FileUploadSerializer(serializers.Serializer):
     class Meta:
         fields = ['file_uploaded']
 
+class ContractResetSerializer(serializers.Serializer):
+    account_number = serializers.CharField()
+    is_finish = serializers.BooleanField()
+
+

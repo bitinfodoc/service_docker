@@ -5,6 +5,7 @@ from . import views
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'contracts/vdgo/upload', views.ContractsVdgoUpload, basename='contracts_vdgo_upload')
 router.register(r'contracts/vdgo/update', views.ContractsVdgoView, basename='contracts_vdgo')
+router.register(r'contracts/vdgo/reset', views.ContractsVdgoUpdate, basename='contracts_vdgo')
 
 urlpatterns = router.urls
 urlpatterns = [

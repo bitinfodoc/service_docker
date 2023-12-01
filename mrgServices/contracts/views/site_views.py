@@ -50,6 +50,7 @@ class ContractsVdgoUpload(viewsets.ViewSet):
         #     else:
         #         return Response({'message': "Error create file"}, status=400)
 
+    
 
     def create(self, request):
         print('add fileviews')
@@ -95,9 +96,7 @@ class ContractsVdgoView(viewsets.ViewSet):
                     print('no errors')
 
                     contract.contract_pdf.save(contract_pdf['pdf_name'], File(open(contract_pdf['pdf_path'], 'rb')))
-                    # print("contract_pdf['pdf_path']")
-                    # print(contract_pdf['pdf_path'])
-                    # # os.remove(contract_pdf['pdf_path'])
+
                 else:
                     return HttpResponse(json.dumps({'message': "Cant create contract pdf file"}), status=401)
         else:

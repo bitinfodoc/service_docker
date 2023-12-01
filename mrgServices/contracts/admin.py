@@ -17,8 +17,8 @@ class ContractVdgoAdmin(admin.ModelAdmin):
             {
                 "fields": [
                         ("account_number", "account_number_rng", "is_izs", "account_address"),
-                        ("id", "created_date", "last_update_date", "is_sended", "is_signed", "is_error"),
-                        ("error_text"),
+                        ("id", "created_date", "last_update_date", "is_sended", "is_signed", "is_finish"),
+                        ("is_error", "error_text"),
                         ("contract_pdf", "contract_pdf_signed"),
                     ],
             },
@@ -69,8 +69,8 @@ class ContractVdgoAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {"widget": Textarea},
     }
-    list_filter = ('consent', 'is_signed', 'is_sended', 'is_izs', )
-    if settings.DEBUG == True:
+    list_filter = ('consent', 'is_signed', 'is_sended', 'is_izs', 'is_finish')
+    if settings.DEBUG == False:
         readonly_fields = (
             'id',
             'created_date',
@@ -110,7 +110,7 @@ class ContractVdgoAdmin(admin.ModelAdmin):
     else:
         readonly_fields = ('id', 'created_date', 'account_number', 'account_number_rng', 'last_update_date', "account_address")
 
-    list_display = [ 'account_number', 'account_number_rng', 'is_izs', 'last_update_date', 'consent', 'is_signed', 'is_sended' ]
+    list_display = [ 'account_number', 'account_number_rng', 'is_izs', 'last_update_date', 'consent', 'is_signed', 'is_sended', 'is_finish']
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
