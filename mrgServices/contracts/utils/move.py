@@ -40,5 +40,5 @@ def move_files(account_number):
 
         conn.storeFile('Reestrs', remote_file_path, source_file)
         source_file.close()
-    conn.disconnect()
+
     return "Success"
