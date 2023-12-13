@@ -28,15 +28,12 @@ class ContractsVdgoUpdate(viewsets.ViewSet):
         serializer = ContractResetSerializer(data=request.data)
         if serializer.is_valid():
             try:
-
                 if request.data.get("token") == "4c53ff6e-d732-4ec9-a94b-19438a0083da":
                     ls = request.data.get("account_number")
                     is_finish = request.data.get("is_finish")
                     is_reset = request.data.get("is_reset")
 
                     contract = ContractVdgo.objects.filter(account_number = ls).first()
-                    print(is_finish)
-                    print(is_reset)
 
                     if (is_finish == None or is_finish == False) and (is_reset == None or is_reset == False):
                         return HttpResponse(json.dumps({'message': "Введены некорректные данные. Поля finish и reset имеют равные значения или не заданы явно.", "status": False}, ensure_ascii=False), status=401)

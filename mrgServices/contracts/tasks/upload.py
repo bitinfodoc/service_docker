@@ -6,12 +6,6 @@ from datetime import datetime
 
 @app.task
 def create_contract_record(file_lines_array):
-    # print(current_file_name)
-
-    # file_path = settings.MEDIA_ROOT + '/upload_files'
-    # file = open("current_file_name", 'r')
-    # print(file)
-    # print('file in task')
 
     for line in file_lines_array:
         # line_result = current_file_name.readline().split('=')

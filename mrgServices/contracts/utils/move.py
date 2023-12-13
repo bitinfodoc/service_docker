@@ -18,7 +18,7 @@ def move_files(account_number):
         is_direct_tcp=True
     )
 
-    conn.connect('172.17.156.10',445)
+    conn.connect(settings.SMB_SHARE_IP, 445)
 
     # проверяем существоанаие дирректори, если нет добавляем
     filelist = conn.listPath('Reestrs', '/vdgo/')
@@ -40,5 +40,5 @@ def move_files(account_number):
 
         conn.storeFile('Reestrs', remote_file_path, source_file)
         source_file.close()
-
+    conn.disconnect()
     return "Success"

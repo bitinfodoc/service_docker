@@ -1,5 +1,6 @@
 
 import os
+import requests
 from django.http import HttpResponse
 import json
 # import django.conf import settings
@@ -50,7 +51,7 @@ class ContractsVdgoUpload(viewsets.ViewSet):
         #     else:
         #         return Response({'message': "Error create file"}, status=400)
 
-    
+
 
     def create(self, request):
         print('add fileviews')
@@ -70,8 +71,30 @@ class ContractsVdgoView(viewsets.ViewSet):
 
 
     def list(self, request):
-        ls = request.GET.get("ls")
-        print(ls)
+        # ls = request.GET.get("ls")
+        # print(ls)
+        # data = {
+        #     "account_number": "14135100",
+        #     "secret": "my-custom-token"
+        # }
+        # response = requests.post(
+        #     url = "http://omrg/api/vdgo/clear",
+        #     headers = {
+        #         'Content-type': 'application/json;',
+        #         'Accept-Charset': 'utf-8',
+        #         },
+        #     proxies = {
+        #         'http': 'http://1.1.1.1/',
+        #         'https': 'https://1.1.1.1/',
+        #     },
+        #     verify=False,
+        #     data = json.dumps(data),
+        # )
+
+        # # response.json()
+        # print(response)
+
+
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
 

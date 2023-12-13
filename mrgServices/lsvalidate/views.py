@@ -13,8 +13,6 @@ class LsUpload(viewsets.ViewSet):
     serializer_class = FileUploadSerializer
     def list(self, request):
 
-
-
         return Response({'response_text': 'hello'}, status=status.HTTP_200_OK)
 
     def create(self, request):
